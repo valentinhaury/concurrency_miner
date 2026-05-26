@@ -1,9 +1,18 @@
+import uuid
+
 class Activity:
     def __init__(self, activity_label):
         self.label = activity_label
+        self.id = uuid.uuid4()
 
     def __str__(self):
         return self.label
 
-    def is_same(self, other):
+    def __eq__(self, other):
         return self.label == other.label
+
+    def __hash__(self):
+        return hash(self.label)
+
+    def get_id(self):
+        return self.id

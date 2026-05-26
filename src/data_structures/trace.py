@@ -7,5 +7,14 @@ class Trace:
         self.activities = activities
         self.relations = relations
 
-    def append(self, item):
-        self.activities.append(item)
+    def append_activity(self, activity):
+        self.activities.append(activity)
+
+    def append_relation(self, relation):
+        self.relations.append(relation)
+
+    def contains_activity(self, activity):
+        return activity in self.activities
+
+    def contains_relation(self, relation):
+        return relation in self.relations
