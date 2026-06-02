@@ -1,9 +1,10 @@
-from data_structures.process_tree import Node
-from data_structures.process_tree_operator import Operator
-from data_structures.activity import Activity
+from log_creation.log_creator import get_log
 
-TestTree = Node(Operator.Exclusive)
-TestTree.add_child(Activity("a"))
-TestTree.add_child(Activity("b"))
+print(str(get_log("exclusive")))
+print(str(get_log("sequence")))
+print(str(get_log("interleafing")))
+print(str(get_log("concurrent")))
+print(str(get_log("parallel")))
+print(str(get_log("c_parallel")))
+print(str(get_log("loop")))
 
-print(str(TestTree))

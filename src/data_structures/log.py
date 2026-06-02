@@ -5,8 +5,8 @@ class Log:
     def __str__(self):
         string = "("
         for trace in self.log:
-            string += str(trace) + ", "
-        string = string[:-2] + ")"
+            string += str(trace) + ",    "
+        string = string[:-5] + ")"
         return string
 
     def add_trace(self, trace):
