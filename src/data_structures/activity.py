@@ -14,5 +14,5 @@ class Activity:
     def __hash__(self):
         return hash(self.label)
 
-    def get_id(self):
-        return self.id
+    def has_same_id(self, other):
+        return self.id == other.id
