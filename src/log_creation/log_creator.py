@@ -43,7 +43,7 @@ def log_sequence():
     return Log([trace_a])
 
 def log_loop():
-    trace_a = Trace([a(), b()], [a()],[a()],[DirectlyFollowsRelation(a, b), DirectlyFollowsRelation(b, a)])
+    trace_a = Trace([a(), b()], [a()],[a()],[DirectlyFollowsRelation(a(), b()), DirectlyFollowsRelation(b(), a())])
     return Log([trace_a])
 
 def log_interleafing():
