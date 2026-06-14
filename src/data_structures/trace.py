@@ -1,6 +1,5 @@
 from src.data_structures.eventually_follows_relation import EventuallyFollowsRelation
 
-
 class Trace:
     def __init__(self, activities=None, start_activities=None, end_activities=None, direct_relations=None):
         if direct_relations is None:
@@ -16,38 +15,14 @@ class Trace:
         self.activities = activities
         self.direct_relations = direct_relations
 
-    def __str__(self):
-        trace_string = "[A{"
-        if self.activities:
-            for activity in self.activities:
-                trace_string += str(activity) + ", "
-            trace_string = trace_string[:-2]
-        trace_string += "}, R{"
-        if self.direct_relations:
-            for relation in self.direct_relations:
-                trace_string += str(relation) + ", "
-            trace_string = trace_string[:-2]
-        trace_string += "}, S{"
-        if self.start_activities:
-            for activity in self.start_activities:
-                trace_string += str(activity) + ", "
-            trace_string = trace_string[:-2]
-        trace_string += "}, E{"
-        if self.end_activities:
-            for activity in self.end_activities:
-                trace_string += str(activity) + ", "
-            trace_string = trace_string[:-2]
-        trace_string += "}]"
-        return trace_string
-
     def append_activity(self, activity):
         self.activities.append(activity)
     def append_relation(self, relation):
         self.direct_relations.append(relation)
 
-    def contains_activity(self, activity):
-        return activity in self.activities
-    def contains_relation(self, relation):
+    def contains_activity_label(self, activity):
+        return activity.label_occurs_at_least(self.activities, 1)
+    def contains_relation_label(self, relation):
         return relation in self.direct_relations
 
     def get_activities(self):
@@ -80,3 +55,27 @@ class Trace:
             EventuallyFollowsRelation(a, b)
             for a, b in closure
         ]
+
+    def __str__(self):
+        trace_string = "[A{"
+        if self.activities:
+            for activity in self.activities:
+                trace_string += str(activity) + ", "
+            trace_string = trace_string[:-2]
+        trace_string += "}, R{"
+        if self.direct_relations:
+            for relation in self.direct_relations:
+                trace_string += str(relation) + ", "
+            trace_string = trace_string[:-2]
+        trace_string += "}, S{"
+        if self.start_activities:
+            for activity in self.start_activities:
+                trace_string += str(activity) + ", "
+            trace_string = trace_string[:-2]
+        trace_string += "}, E{"
+        if self.end_activities:
+            for activity in self.end_activities:
+                trace_string += str(activity) + ", "
+            trace_string = trace_string[:-2]
+        trace_string += "}]"
+        return trace_string

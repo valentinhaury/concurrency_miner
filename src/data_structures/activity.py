@@ -8,11 +8,15 @@ class Activity:
     def __str__(self):
         return self.label
 
-    def __eq__(self, other):
+    def has_same_id_as(self, other):
+        return self.id == other.id
+
+    def has_same_label_as(self, other):
         return self.label == other.label
 
-    def __hash__(self):
-        return hash(self.label)
-
-    def has_same_id(self, other):
-        return self.id == other.id
+    def label_occurs_at_least(self, activities, count):
+        occurrences = sum(
+            1 for activity in activities
+            if activity.has_same_label_as(self)
+        )
+        return occurrences >= count

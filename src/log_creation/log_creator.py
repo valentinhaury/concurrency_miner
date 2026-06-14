@@ -1,3 +1,5 @@
+from ctypes import c_int16
+
 from data_structures.activity import Activity
 from data_structures.directly_follows_relation import DirectlyFollowsRelation
 from data_structures.log import Log
@@ -20,6 +22,27 @@ def g():
 def h():
     return Activity("h")
 
+def arbitrary_trace_a_sequence():
+    a1 = a()
+    b1 = b()
+    c1 = c()
+    return Trace([a1, b1, c1], [a1],[c1],[DirectlyFollowsRelation(a1, b1), DirectlyFollowsRelation(b1, c1)])
+def arbitrary_trace_sequence_a():
+    a1 = a()
+    b1 = b()
+    c1 = c()
+    return Trace([a1, b1, c1], [b1], [a1], [DirectlyFollowsRelation(b1, c1), DirectlyFollowsRelation(c1, a1)])
+def interleafing_trace_a_sequence():
+    a1 = a()
+    b1 = b()
+    c1 = c()
+    return Trace([a1, b1, c1], [b1], [c1], [DirectlyFollowsRelation(b1, a1), DirectlyFollowsRelation(a1, c1)])
+def certain_parallel_trace_a_sequence():
+    a1 = a()
+    b1 = b()
+    c1 = c()
+    return Trace([a1, b1, c1], [a1, b1], [a1, c1], [DirectlyFollowsRelation(b1, c1)])
+
 
 def get_log(specifier):
     match specifier:
@@ -34,38 +57,51 @@ def get_log(specifier):
 
 
 def log_exclusive():
-    trace_a = Trace([a()], [a()], [a()])
-    trace_b = Trace([b()], [b()], [b()])
+    a1 = a()
+    b1 = b()
+    trace_a = Trace([a1], [a1], [a1])
+    trace_b = Trace([b1], [b1], [b1])
     return Log([trace_a, trace_b])
 
 def log_sequence():
-    trace_a = Trace([a(), b()], [a()], [b()], [DirectlyFollowsRelation(a(), b())])
+    a1 = a()
+    b1 = b()
+    trace_a = Trace([a1, b1], [a1], [b1], [DirectlyFollowsRelation(a1, b1)])
     return Log([trace_a])
 
 def log_loop():
-    trace_a = Trace([a(), b()], [a()],[a()],[DirectlyFollowsRelation(a(), b()), DirectlyFollowsRelation(b(), a())])
+    a1 = a()
+    a2 = a()
+    b1 = b()
+    trace_a = Trace([a1, a2, b1], [a1],[a2],[DirectlyFollowsRelation(a1, b1), DirectlyFollowsRelation(b1, a2)])
     return Log([trace_a])
 
 def log_interleafing():
-    trace_a = Trace([a(), b(), c()], [a()],[c()],[DirectlyFollowsRelation(a(), b()), DirectlyFollowsRelation(b(), c())])
-    trace_b = Trace([a(), b(), c()], [b()], [a()], [DirectlyFollowsRelation(b(), c()), DirectlyFollowsRelation(c(), a())])
+    trace_a = arbitrary_trace_a_sequence()
+    trace_b = arbitrary_trace_sequence_a()
     return Log([trace_a, trace_b])
 
 def log_concurrent():
-    trace_a = Trace([a(), b(), c()], [a()],[c()],[DirectlyFollowsRelation(a(), b()), DirectlyFollowsRelation(b(), c())])
-    trace_b = Trace([a(), b(), c()], [b()], [a()], [DirectlyFollowsRelation(b(), c()), DirectlyFollowsRelation(c(), a())])
-    trace_c = Trace([a(), b(), c()], [b()], [c()], [DirectlyFollowsRelation(b(), a()), DirectlyFollowsRelation(a(), c())])
+    trace_a = arbitrary_trace_a_sequence()
+    trace_b = arbitrary_trace_sequence_a()
+    trace_c = interleafing_trace_a_sequence()
     return Log([trace_a, trace_b, trace_c])
 
 def log_parallel():
-    trace_a = Trace([a(), b(), c()], [a()], [c()], [DirectlyFollowsRelation(a(), b()), DirectlyFollowsRelation(b(), c())])
-    trace_b = Trace([a(), b(), c()], [b()], [a()], [DirectlyFollowsRelation(b(), c()), DirectlyFollowsRelation(c(), a())])
-    trace_c = Trace([a(), b(), c()], [b()], [c()], [DirectlyFollowsRelation(b(), a()), DirectlyFollowsRelation(a(), c())])
-    trace_d = Trace([a(), b(), c()], [a(), b()], [c()], [DirectlyFollowsRelation(a(), c()), DirectlyFollowsRelation(b(), c())])
-    trace_e = Trace([a(), b(), c()], [b()], [a(), c()], [DirectlyFollowsRelation(b(), c()), DirectlyFollowsRelation(b(), a())])
-    trace_f = Trace([a(), b(), c()], [a(), b()], [a(), c()], [DirectlyFollowsRelation(b(), c())])
+    trace_a = arbitrary_trace_a_sequence()
+    trace_b = arbitrary_trace_sequence_a()
+    trace_c = interleafing_trace_a_sequence()
+    a1 = a()
+    b1 = b()
+    c1 = c()
+    trace_d = Trace([a1, b1, c1], [a1, b1], [c1], [DirectlyFollowsRelation(a1, c1), DirectlyFollowsRelation(b1, c1)])
+    a2 = a()
+    b2 = b()
+    c2 = c()
+    trace_e = Trace([a2, b2, c2], [b2], [a2, c2], [DirectlyFollowsRelation(b2, c2), DirectlyFollowsRelation(b2, a2)])
+    trace_f = certain_parallel_trace_a_sequence()
     return Log([trace_a, trace_b, trace_c, trace_d, trace_e, trace_f])
 
 def log_c_parallel():
-    trace_f = Trace([a(), b(), c()], [a(), b()], [a(), c()], [DirectlyFollowsRelation(b(), c())])
+    trace_f = certain_parallel_trace_a_sequence()
     return Log([trace_f])
