@@ -1,5 +1,3 @@
-from ctypes import c_int16
-
 from data_structures.activity import Activity
 from data_structures.directly_follows_relation import DirectlyFollowsRelation
 from data_structures.log import Log
