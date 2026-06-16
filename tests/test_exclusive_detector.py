@@ -1,8 +1,9 @@
 from src.log_creation.log_creator import get_log
 from src.split_detection.detect_exclusive import detect_exclusive
+from src.data_structures.log import Log
 
 def test_empty_log():
-    assert True
+    assert detect_exclusive(Log([])) == False
 
 def test_exclusive_log():
     assert detect_exclusive(get_log("exclusive")) == True
