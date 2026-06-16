@@ -14,3 +14,6 @@ class Log:
 
     def get_traces(self):
         return self.log
+
+    def number_of_traces(self):
+        return len(self.log)

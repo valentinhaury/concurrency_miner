@@ -1,7 +1,7 @@
-from data_structures.activity import Activity
-from data_structures.directly_follows_relation import DirectlyFollowsRelation
-from data_structures.log import Log
-from data_structures.trace import Trace
+from src.data_structures.activity import Activity
+from src.data_structures.directly_follows_relation import DirectlyFollowsRelation
+from src.data_structures.log import Log
+from src.data_structures.trace import Trace
 
 def a():
     return Activity("a")
@@ -50,7 +50,7 @@ def get_log(specifier):
         case "interleafing":    return log_interleafing()   # interleafing log
         case "concurrent":      return log_concurrent()   # concurrent log
         case "parallel":        return log_parallel()   # parallel log
-        case "c_parallel":      return log_c_parallel()   # certain parallel log
+        case "certain_parallel":      return log_c_parallel()   # certain parallel log
     return None
 
 

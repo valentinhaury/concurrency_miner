@@ -57,7 +57,7 @@ class Trace:
         ]
 
     def __str__(self):
-        trace_string = "[A{"
+        trace_string = "(A{"
         if self.activities:
             for activity in self.activities:
                 trace_string += str(activity) + ", "
@@ -77,5 +77,5 @@ class Trace:
             for activity in self.end_activities:
                 trace_string += str(activity) + ", "
             trace_string = trace_string[:-2]
-        trace_string += "}]"
+        trace_string += "})"
         return trace_string
