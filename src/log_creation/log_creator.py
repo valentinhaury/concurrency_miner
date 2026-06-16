@@ -3,6 +3,11 @@ from src.data_structures.directly_follows_relation import DirectlyFollowsRelatio
 from src.data_structures.log import Log
 from src.data_structures.trace import Trace
 
+##
+##
+##
+##
+## USED FOR TESTING DONT CHANGE
 def a():
     return Activity("a")
 def b():
