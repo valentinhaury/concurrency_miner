@@ -9,6 +9,8 @@ class Activity:
         return self.label
 
     def __eq__(self, other):
+        if not isinstance(other, Activity):
+            return NotImplemented
         return self.label == other.label
 
     def __hash__(self):
