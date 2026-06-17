@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e3ce310f-a6cb-4654-8df9-4da22971cc3a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/test_sequence_detector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data_structures/relation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_structures/relation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/split_detection/detect_sequence.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/split_detection/detect_sequence.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/data_structures/overlapping_relation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data_structures/directly_follows_relation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_structures/directly_follows_relation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data_structures/eventually_follows_relation.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_structures/eventually_follows_relation.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +72,7 @@
       <updated>1780386150700</updated>
       <workItem from="1781428955322" duration="3412000" />
       <workItem from="1781596350578" duration="6184000" />
-      <workItem from="1781682287803" duration="667000" />
+      <workItem from="1781682287803" duration="1300000" />
     </task>
     <servers />
   </component>

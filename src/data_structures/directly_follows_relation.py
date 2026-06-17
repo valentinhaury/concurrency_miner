@@ -5,4 +5,4 @@ class DirectlyFollowsRelation(Relation):
         super().__init__(first_activity, second_activity)
 
     def __str__(self):
-        return "(" + str(self.first_activity) + ">" + str(self.second_activity) + ")"
+        return "(" + str(self.first_activity) + "->-" + str(self.second_activity) + ")"
