@@ -1,6 +1,7 @@
 from itertools import combinations
 
 from src.data_structures.relation import Relation
+from src.data_structures.relation import Relation
 from src.data_structures.directly_follows_relation import DirectlyFollowsRelation
 from src.data_structures.overlapping_relation import OverlappingRelation
 from src.data_structures.eventually_follows_relation import EventuallyFollowsRelation
@@ -25,7 +26,7 @@ class Trace:
         return True
 
     def has_disjunct_activities_to(self, other):
-        duplicate = [a for a in self.activities if a.label_occurs_at_least(other.get_activities(), 1)]
+        duplicate = [a for a in self.activities if a.exists_by_label(other.get_activities())]
         if duplicate:
             return False
         return True
@@ -46,7 +47,10 @@ class Trace:
         ]
 
     def get_eventually_follows_relations_by_label(self):
-        eventually_follows_relations = self.directly_follows_relations
+        eventually_follows_relations = []
+        for relation in self.directly_follows_relations:
+           eventually_follows_relations.append(EventuallyFollowsRelation(relation.get_first_activity(), relation.get_second_activity()))
+
         added_relations = ["true"]
         while added_relations:
             added_relations = [

@@ -8,8 +8,8 @@ class Relation:
 
     def exists_by_label(self, relations):
         for relation in relations:
-            same_first = self.first_activity.get_label == relation.get_first_activity().get_label
-            same_second = self.second_activity.get_label == relation.get_second_activity().get_label
+            same_first = self.first_activity.get_label() == relation.get_first_activity().get_label()
+            same_second = self.second_activity.get_label() == relation.get_second_activity().get_label()
             if same_first and same_second:
                 return True
         return False

@@ -17,9 +17,10 @@ class Activity:
     def get_label(self):
         return self.label
 
-    def label_occurs_at_least(self, activities, count):
+    def exists_by_label(self, activities):
+        count = 0
         occurrences = sum(
             1 for activity in activities
             if activity.get_label() == self.label
         )
-        return occurrences >= count
+        return occurrences > count

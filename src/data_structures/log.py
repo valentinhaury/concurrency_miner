@@ -18,7 +18,7 @@ class Log:
     def get_eventually_follows_relations_by_label(self):
         eventually_follows_relations = []
         for trace in self.traces:
-            trace_relations = trace.get_eventually_follows_relations()
+            trace_relations = trace.get_eventually_follows_relations_by_label()
             for relation in trace_relations:
                 if not relation.exists_by_label(eventually_follows_relations):
                     eventually_follows_relations.append(relation)
@@ -28,9 +28,19 @@ class Log:
     def get_overlapping_relations_by_label(self):
         overlapping_relations = []
         for trace in self.traces:
-            trace_relations = trace.get_overlapping_relations()
+            trace_relations = trace.get_overlapping_relations_by_label()
             for relation in trace_relations:
                 if not relation.exists_by_label(overlapping_relations):
                     overlapping_relations.append(relation)
 
         return overlapping_relations
+
+    def get_activities_by_label(self):
+        activities = []
+        for trace in self.traces:
+            trace_activities = trace.get_activities()
+            for activity in trace_activities:
+                if not activity.exists_by_label(activities):
+                    activities.append(activity)
+
+        return activities
