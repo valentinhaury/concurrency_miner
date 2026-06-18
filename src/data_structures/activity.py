@@ -5,23 +5,21 @@ class Activity:
         self.label = activity_label
         self.id = uuid.uuid4()
 
+    def __repr__(self):
+        return f"<Activity \"{self.label}\" with id {self.id}>"
+
     def __str__(self):
         return self.label
 
-    def __eq__(self, other):
-        if not isinstance(other, Activity):
-            return NotImplemented
-        return self.label == other.label
+    def get_id(self):
+        return self.id
 
-    def __hash__(self):
-        return hash(self.label)
-
-    def has_same_id_as(self, other):
-        return self.id == other.id
+    def get_label(self):
+        return self.label
 
     def label_occurs_at_least(self, activities, count):
         occurrences = sum(
             1 for activity in activities
-            if activity.has_same_label_as(self)
+            if activity.get_label() == self.label
         )
         return occurrences >= count

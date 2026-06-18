@@ -6,24 +6,13 @@ class Relation:
     def __str__(self):
         return "(" + str(self.first_activity) + "R" + str(self.second_activity) + ")"
 
-    def __eq__(self, other):
-        if not isinstance(other, Relation):
-            return NotImplemented
-        return self.first_activity == other.first_activity and self.second_activity == other.second_activity
-
-    def __hash__(self):
-        return hash((self.first_activity, self.second_activity))
-
     def relation_occurs_in(self, relations):
         for relation in relations:
-            same_first = self.first_activity.has_same_label_as(relation.first_activity)
-            same_second = self.second_activity.has_same_label_as(relation.second_activity)
+            same_first = self.first_activity.get_label == relation.get_first_activity().get_label
+            same_second = self.second_activity.get_label == relation.get_second_activity().get_label
             if same_first and same_second:
                 return True
         return False
-
-    def has_same_activity_ids(self, other):
-        return self.first_activity.has_same_id_as(other.first_activity) and self.second_activity.has_same_id_as(other.second_activity)
 
     def get_first_activity(self):
         return self.first_activity
