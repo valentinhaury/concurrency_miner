@@ -11,10 +11,6 @@ def only_one_eventually_follows_relations_exist(activity, activities, eventually
             right = True
         if EventuallyFollowsRelation(activity, a).exists_by_label(eventually_follows_relations):
             left = True
-    if right != left:
-        print("genau eine existiert")
-    else:
-        print("nicht genau eine existiert")
     return right != left
 
 def overlapping_relation_exists(activity, activities, overlapping_relation):
