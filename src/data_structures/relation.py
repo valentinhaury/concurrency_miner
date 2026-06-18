@@ -14,6 +14,14 @@ class Relation:
                 return True
         return False
 
+    def exists_by_id(self, relations):
+        for relation in relations:
+            same_first = self.first_activity.get_id == relation.get_first_activity().get_id
+            same_second = self.second_activity.get_id == relation.get_second_activity().get_id
+            if same_first and same_second:
+                return True
+        return False
+
     def get_first_activity(self):
         return self.first_activity
 

@@ -36,9 +36,8 @@ class Trace:
     def get_directly_follows_relations(self):
         return self.directly_follows_relations
 
-    def get_overlapping_relations(self):
-        eventually_follows_relations = self.get_eventually_follows_relations()
-
+    def get_overlapping_relations_by_label(self):
+        eventually_follows_relations = self.get_eventually_follows_relations_by_label()
         return [
             OverlappingRelation(a1, a2)
             for a1, a2 in combinations(self.activities, 2)
@@ -46,7 +45,7 @@ class Trace:
                and not EventuallyFollowsRelation(a2, a1).exists_by_label(eventually_follows_relations)
         ]
 
-    def get_eventually_follows_relations(self):
+    def get_eventually_follows_relations_by_label(self):
         eventually_follows_relations = self.directly_follows_relations
         added_relations = ["true"]
         while added_relations:
