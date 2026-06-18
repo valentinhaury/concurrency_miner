@@ -7,20 +7,18 @@ def detect_exclusive(log):
         return False
     else:
         all_traces = log.get_traces()
-        partition = [all_traces[0]]
-        changed = True
-        while changed:
-            changed = False
-            not_disjoint = []
-            for trace in partition:
-                for trace2 in all_traces:
-                    if not set(trace.get_activities()).isdisjoint(set(trace2.get_activities())) and trace2 not in not_disjoint and trace2 not in partition:
-                        not_disjoint.append(trace2)
-                        changed = True
-            if not_disjoint:
-                for trace in not_disjoint:
-                    partition.append(trace)
-        if len(all_traces) == len(partition):
+        trace_partition = [all_traces[0]]
+        changed_partition = ["true"]
+        while changed_partition:
+            changed_partition = {
+                t2
+                for t1 in trace_partition
+                for t2 in all_traces
+                if t2 not in trace_partition
+                and not t1.has_disjunct_activities_to(t2)
+            }
+            trace_partition.extend(changed_partition)
+        if len(all_traces) == len(trace_partition):
             return False
         else:
             return True
