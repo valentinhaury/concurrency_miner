@@ -6,7 +6,7 @@ class Relation:
     def __str__(self):
         return "(" + str(self.first_activity) + "R" + str(self.second_activity) + ")"
 
-    def relation_occurs_in(self, relations):
+    def exists_by_label(self, relations):
         for relation in relations:
             same_first = self.first_activity.get_label == relation.get_first_activity().get_label
             same_second = self.second_activity.get_label == relation.get_second_activity().get_label
