@@ -3,7 +3,7 @@ from src.data_structures.trace import Trace
 
 
 def detect_exclusive(log):
-    if log.number_of_traces() < 2:
+    if len(log.get_traces()) < 2:
         return False
     else:
         all_traces = log.get_traces()
