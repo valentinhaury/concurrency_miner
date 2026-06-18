@@ -1,5 +1,6 @@
 from itertools import combinations
 
+from src.data_structures.relation import Relation
 from src.data_structures.directly_follows_relation import DirectlyFollowsRelation
 from src.data_structures.overlapping_relation import OverlappingRelation
 from src.data_structures.eventually_follows_relation import EventuallyFollowsRelation
@@ -46,7 +47,22 @@ class Trace:
         ]
 
     def get_eventually_follows_relations(self):
-        return True
+        eventually_follows_relations = self.directly_follows_relations
+        added_relations = ["true"]
+        while added_relations:
+            added_relations = [
+                EventuallyFollowsRelation(a1, a2)
+                for a1, a2 in combinations(self.activities, 2)
+                for a3 in self.activities
+                if not Relation(a1, a2).exists_by_label(eventually_follows_relations)
+                and Relation(a1, a3).exists_by_label(eventually_follows_relations)
+                and Relation(a3, a2).exists_by_label(eventually_follows_relations)
+            ]
+            if added_relations:
+                for relation in added_relations:
+                    if not relation.exists_by_label(eventually_follows_relations):
+                        eventually_follows_relations.append(relation)
+        return eventually_follows_relations
 
     def __str__(self):
         trace_string = "(A{"
