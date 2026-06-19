@@ -15,6 +15,17 @@ class Log:
     def get_traces(self):
         return self.traces
 
+    def get_directly_follows_relations_by_label(self):
+        directly_follows_relations = []
+        for trace in self.traces:
+            unique_trace_directly_follows_relations = [
+                r
+                for r in trace.get_directly_follows_relations_by_label()
+                if r not in directly_follows_relations
+            ]
+            directly_follows_relations.extend(unique_trace_directly_follows_relations)
+        return directly_follows_relations
+
     def get_eventually_follows_relations_by_label(self):
         eventually_follows_relations = []
         for trace in self.traces:

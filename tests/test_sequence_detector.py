@@ -11,14 +11,17 @@ def test_exclusive_log():
 def test_sequence_log():
     assert detect_sequence(get_log("sequence")) == True
 
-def test_concurrent_log():
-    assert detect_sequence(get_log("concurrent")) == False
+def test_arbitrary_order_log():
+    assert detect_sequence(get_log("arbitrary")) == False
 
 def test_interleafing_log():
     assert detect_sequence(get_log("interleafing")) == False
 
+def test_concurrent_log():
+    assert detect_sequence(get_log("concurrent")) == False
+
 def test_parallel_log():
     assert detect_sequence(get_log("parallel")) == False
 
-def test_certain_parallel_log():
-    assert detect_sequence(get_log("certain_parallel")) == False
+def test_loop_log():
+    assert detect_sequence(get_log("loop")) == False

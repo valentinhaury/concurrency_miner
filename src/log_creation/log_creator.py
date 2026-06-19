@@ -52,10 +52,10 @@ def get_log(specifier):
         case "exclusive":       return log_exclusive()   # exclusive Log
         case "sequence":        return log_sequence()   # sequence log
         case "loop":            return log_loop()   # loop log
-        case "interleafing":    return log_interleafing()   # interleafing log
-        case "concurrent":      return log_concurrent()   # concurrent log
-        case "parallel":        return log_parallel()   # parallel log
-        case "certain_parallel":      return log_c_parallel()   # certain parallel log
+        case "arbitrary":    return log_arbitrary_order()   # interleafing log
+        case "interleafing":      return log_interleafing()   # concurrent log
+        case "concurrent":        return log_concurrent()   # parallel log
+        case "parallel":      return log_parallel()   # certain parallel log
     return None
 
 
@@ -79,18 +79,18 @@ def log_loop():
     trace_a = Trace([a1, a2, b1], [DirectlyFollowsRelation(a1, b1), DirectlyFollowsRelation(b1, a2)])
     return Log([trace_a])
 
-def log_interleafing():
+def log_arbitrary_order():
     trace_a = arbitrary_trace_a_sequence()
     trace_b = arbitrary_trace_sequence_a()
     return Log([trace_a, trace_b])
 
-def log_concurrent():
+def log_interleafing():
     trace_a = arbitrary_trace_a_sequence()
     trace_b = arbitrary_trace_sequence_a()
     trace_c = interleafing_trace_a_sequence()
     return Log([trace_a, trace_b, trace_c])
 
-def log_parallel():
+def log_concurrent():
     trace_a = arbitrary_trace_a_sequence()
     trace_b = arbitrary_trace_sequence_a()
     trace_c = interleafing_trace_a_sequence()
@@ -105,6 +105,6 @@ def log_parallel():
     trace_f = certain_parallel_trace_a_sequence()
     return Log([trace_a, trace_b, trace_c, trace_d, trace_e, trace_f])
 
-def log_c_parallel():
+def log_parallel():
     trace_f = certain_parallel_trace_a_sequence()
     return Log([trace_f])

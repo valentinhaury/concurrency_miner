@@ -31,11 +31,19 @@ class Trace:
             return False
         return True
 
-
     def get_activities(self):
         return self.activities
+
     def get_directly_follows_relations(self):
         return self.directly_follows_relations
+
+    def get_directly_follows_relations_by_label(self):
+        dfg_by_label = []
+        if self.directly_follows_relations:
+            for relation in self.directly_follows_relations:
+                if not relation.exists_by_label(dfg_by_label):
+                    dfg_by_label.append(relation)
+        return dfg_by_label
 
     def get_overlapping_relations_by_label(self):
         eventually_follows_relations = self.get_eventually_follows_relations_by_label()
