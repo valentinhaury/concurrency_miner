@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e3ce310f-a6cb-4654-8df9-4da22971cc3a" name="Changes" comment="" />
+    <list default="true" id="e3ce310f-a6cb-4654-8df9-4da22971cc3a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data_structures/process_tree_operator.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_structures/process_tree_operator.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,6 +72,7 @@
       <workItem from="1781428955322" duration="3412000" />
       <workItem from="1781596350578" duration="6184000" />
       <workItem from="1781682287803" duration="17567000" />
+      <workItem from="1781850409995" duration="643000" />
     </task>
     <servers />
   </component>
