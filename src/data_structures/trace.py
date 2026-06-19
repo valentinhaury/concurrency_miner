@@ -1,7 +1,6 @@
 from itertools import combinations
 
 from src.data_structures.relation import Relation
-from src.data_structures.relation import Relation
 from src.data_structures.directly_follows_relation import DirectlyFollowsRelation
 from src.data_structures.overlapping_relation import OverlappingRelation
 from src.data_structures.eventually_follows_relation import EventuallyFollowsRelation
@@ -15,8 +14,23 @@ class Trace:
         self.activities = activities
         self.directly_follows_relations = directly_follows_relations
 
+    def __str__(self):
+        trace_string = "(A{"
+        if self.activities:
+            for activity in self.activities:
+                trace_string += str(activity) + ", "
+            trace_string = trace_string[:-2]
+        trace_string += "}, R{"
+        if self.directly_follows_relations:
+            for relation in self.directly_follows_relations:
+                trace_string += str(relation) + ", "
+            trace_string = trace_string[:-2]
+        trace_string += "})"
+        return trace_string
+
     def append_activity(self, activity):
         self.activities.append(activity)
+
     def append_directly_follows_relation(self, relation):
         self.directly_follows_relations.append(relation)
 
@@ -33,6 +47,26 @@ class Trace:
 
     def get_activities(self):
         return self.activities
+
+    def get_start_activities(self):
+        start_activities = []
+        if self.activities:
+            for a1 in self.activities:
+                for a2 in self.activities:
+                    if (not DirectlyFollowsRelation(a2, a1).exists_by_id(self.directly_follows_relations)
+                        and not a1.exitsts_by_label(start_activities)):
+                        start_activities.append(a1)
+        return start_activities
+
+    def get_end_activities(self):
+        end_activities = []
+        if self.activities:
+            for a1 in self.activities:
+                for a2 in self.activities:
+                    if (not DirectlyFollowsRelation(a1, a2).exists_by_id(self.directly_follows_relations)
+                        and not a1.exitsts_by_label(end_activities)):
+                        end_activities.append(a1)
+        return end_activities
 
     def get_directly_follows_relations(self):
         return self.directly_follows_relations
@@ -75,16 +109,3 @@ class Trace:
                         eventually_follows_relations.append(relation)
         return eventually_follows_relations
 
-    def __str__(self):
-        trace_string = "(A{"
-        if self.activities:
-            for activity in self.activities:
-                trace_string += str(activity) + ", "
-            trace_string = trace_string[:-2]
-        trace_string += "}, R{"
-        if self.directly_follows_relations:
-            for relation in self.directly_follows_relations:
-                trace_string += str(relation) + ", "
-            trace_string = trace_string[:-2]
-        trace_string += "})"
-        return trace_string
