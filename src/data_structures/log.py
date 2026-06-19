@@ -55,3 +55,21 @@ class Log:
                     activities.append(activity)
 
         return activities
+
+    def get_start_activities_by_label(self):
+        start_activities = []
+        for trace in self.traces:
+            trace_start_activities = trace.get_start_activities()
+            for activity in trace_start_activities:
+                if not activity.exists_by_label(start_activities):
+                    start_activities.append(activity)
+        return start_activities
+
+    def get_end_activities_by_label(self):
+        end_activities = []
+        for trace in self.traces:
+            trace_end_activities = trace.get_end_activities()
+            for activity in trace_end_activities:
+                if not activity.exists_by_label(end_activities):
+                    end_activities.append(activity)
+        return end_activities

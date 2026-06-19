@@ -49,13 +49,13 @@ def certain_parallel_trace_a_sequence():
 
 def get_log(specifier):
     match specifier:
-        case "exclusive":       return log_exclusive()   # exclusive Log
-        case "sequence":        return log_sequence()   # sequence log
-        case "loop":            return log_loop()   # loop log
-        case "arbitrary":    return log_arbitrary_order()   # interleafing log
-        case "interleafing":      return log_interleafing()   # concurrent log
-        case "concurrent":        return log_concurrent()   # parallel log
-        case "parallel":      return log_parallel()   # certain parallel log
+        case "exclusive":       return log_exclusive()          # exclusive Log
+        case "sequence":        return log_sequence()           # sequence log
+        case "loop":            return log_loop()               # loop log
+        case "arbitrary":       return log_arbitrary_order()    # arbitrary order log
+        case "interleafing":    return log_interleafing()       # interleafing log
+        case "concurrent":      return log_concurrent()         # concurrent log
+        case "parallel":        return log_parallel()           # parallel log
     return None
 
 

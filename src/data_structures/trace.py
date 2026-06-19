@@ -1,4 +1,4 @@
-from itertools import combinations
+from itertools import product
 
 from src.data_structures.relation import Relation
 from src.data_structures.directly_follows_relation import DirectlyFollowsRelation
@@ -52,20 +52,24 @@ class Trace:
         start_activities = []
         if self.activities:
             for a1 in self.activities:
+                checked = True
                 for a2 in self.activities:
-                    if (not DirectlyFollowsRelation(a2, a1).exists_by_id(self.directly_follows_relations)
-                        and not a1.exitsts_by_label(start_activities)):
-                        start_activities.append(a1)
+                    if DirectlyFollowsRelation(a2, a1).exists_by_id(self.directly_follows_relations):
+                        checked = False
+                if checked and  not a1.exists_by_label(start_activities):
+                    start_activities.append(a1)
         return start_activities
 
     def get_end_activities(self):
         end_activities = []
         if self.activities:
             for a1 in self.activities:
+                checked = True
                 for a2 in self.activities:
-                    if (not DirectlyFollowsRelation(a1, a2).exists_by_id(self.directly_follows_relations)
-                        and not a1.exitsts_by_label(end_activities)):
-                        end_activities.append(a1)
+                    if DirectlyFollowsRelation(a1, a2).exists_by_id(self.directly_follows_relations):
+                        checked = False
+                if checked and not a1.exists_by_label(end_activities):
+                    end_activities.append(a1)
         return end_activities
 
     def get_directly_follows_relations(self):
@@ -83,7 +87,7 @@ class Trace:
         eventually_follows_relations = self.get_eventually_follows_relations_by_label()
         return [
             OverlappingRelation(a1, a2)
-            for a1, a2 in combinations(self.activities, 2)
+            for a1, a2 in product(self.activities, repeat = 2)
             if not EventuallyFollowsRelation(a1, a2).exists_by_label(eventually_follows_relations)
                and not EventuallyFollowsRelation(a2, a1).exists_by_label(eventually_follows_relations)
         ]
@@ -97,15 +101,18 @@ class Trace:
         while added_relations:
             added_relations = [
                 EventuallyFollowsRelation(a1, a2)
-                for a1, a2 in combinations(self.activities, 2)
+                for a1, a2 in product(self.activities, repeat=2)
                 for a3 in self.activities
                 if not Relation(a1, a2).exists_by_label(eventually_follows_relations)
-                and Relation(a1, a3).exists_by_label(eventually_follows_relations)
-                and Relation(a3, a2).exists_by_label(eventually_follows_relations)
+                   and Relation(a1, a3).exists_by_label(eventually_follows_relations)
+                   and Relation(a3, a2).exists_by_label(eventually_follows_relations)
             ]
+
             if added_relations:
                 for relation in added_relations:
                     if not relation.exists_by_label(eventually_follows_relations):
                         eventually_follows_relations.append(relation)
         return eventually_follows_relations
+
+
 
