@@ -6,8 +6,8 @@ def detect_interleafing(log):
     return len(create_interleafing_partitions(log)) > 1
 
 def fully_connected(a1, a2, directly_follows_relations):
-    if (not DirectlyFollowsRelation(a1, a2).exists_by_label(directly_follows_relations)
-     or not DirectlyFollowsRelation(a2, a1).exists_by_label(directly_follows_relations)
+    if (not DirectlyFollowsRelation(a1, a2).relation_exists_by_label(directly_follows_relations)
+     or not DirectlyFollowsRelation(a2, a1).relation_exists_by_label(directly_follows_relations)
      ):
         return False
     return True
@@ -15,9 +15,9 @@ def fully_connected(a1, a2, directly_follows_relations):
 def are_in_loop(a1, a2, log):
     start = log.get_start_activities_by_label()
     end = log.get_end_activities_by_label()
-    if not a1.exists_by_label(start) and not a1.exists_by_label(end):
+    if not a1.activity_exists_by_label(start) and not a1.activity_exists_by_label(end):
         return True
-    if not a2.exists_by_label(start) and not a2.exists_by_label(end):
+    if not a2.activity_exists_by_label(start) and not a2.activity_exists_by_label(end):
         return True
     return False
 
@@ -44,7 +44,7 @@ def create_interleafing_partitions(log):
                     length_activities = len(activities)
                     for i in range(length_activities):
                         a2 = activities.pop()
-                        if OverlappingRelation(a1, a2).exists_by_label(overlapping_relations) or OverlappingRelation(a2, a1).exists_by_label(overlapping_relations):
+                        if OverlappingRelation(a1, a2).relation_exists_by_label(overlapping_relations) or OverlappingRelation(a2, a1).relation_exists_by_label(overlapping_relations):
                             if a2 not in partition:
                                 partition.append(a2)
                         elif not fully_connected(a1, a2, directly_follows_relations):

@@ -7,15 +7,15 @@ def only_one_eventually_follows_relations_exist(activity, activities, eventually
     right = False
     left = False
     for a in activities:
-        if EventuallyFollowsRelation(a, activity).exists_by_label(eventually_follows_relations):
+        if EventuallyFollowsRelation(a, activity).relation_exists_by_label(eventually_follows_relations):
             right = True
-        if EventuallyFollowsRelation(activity, a).exists_by_label(eventually_follows_relations):
+        if EventuallyFollowsRelation(activity, a).relation_exists_by_label(eventually_follows_relations):
             left = True
     return right != left
 
 def overlapping_relation_exists(activity, activities, overlapping_relations):
     for a in activities:
-        if OverlappingRelation(a, activity).exists_by_label(overlapping_relations):
+        if OverlappingRelation(a, activity).relation_exists_by_label(overlapping_relations):
             return True
     return False
 

@@ -40,7 +40,7 @@ class Trace:
         return True
 
     def has_disjunct_activities_to(self, other):
-        duplicate = [a for a in self.activities if a.exists_by_label(other.get_activities())]
+        duplicate = [a for a in self.activities if a.activity_exists_by_label(other.get_activities())]
         if duplicate:
             return False
         return True
@@ -54,9 +54,9 @@ class Trace:
             for a1 in self.activities:
                 checked = True
                 for a2 in self.activities:
-                    if DirectlyFollowsRelation(a2, a1).exists_by_id(self.directly_follows_relations):
+                    if DirectlyFollowsRelation(a2, a1).relation_exists_by_id(self.directly_follows_relations):
                         checked = False
-                if checked and  not a1.exists_by_label(start_activities):
+                if checked and  not a1.activity_exists_by_label(start_activities):
                     start_activities.append(a1)
         return start_activities
 
@@ -66,9 +66,9 @@ class Trace:
             for a1 in self.activities:
                 checked = True
                 for a2 in self.activities:
-                    if DirectlyFollowsRelation(a1, a2).exists_by_id(self.directly_follows_relations):
+                    if DirectlyFollowsRelation(a1, a2).relation_exists_by_id(self.directly_follows_relations):
                         checked = False
-                if checked and not a1.exists_by_label(end_activities):
+                if checked and not a1.activity_exists_by_label(end_activities):
                     end_activities.append(a1)
         return end_activities
 
@@ -79,7 +79,7 @@ class Trace:
         dfg_by_label = []
         if self.directly_follows_relations:
             for relation in self.directly_follows_relations:
-                if not relation.exists_by_label(dfg_by_label):
+                if not relation.relation_exists_by_label(dfg_by_label):
                     dfg_by_label.append(relation)
         return dfg_by_label
 
@@ -88,8 +88,8 @@ class Trace:
         return [
             OverlappingRelation(a1, a2)
             for a1, a2 in product(self.activities, repeat = 2)
-            if not EventuallyFollowsRelation(a1, a2).exists_by_label(eventually_follows_relations)
-               and not EventuallyFollowsRelation(a2, a1).exists_by_label(eventually_follows_relations)
+            if not EventuallyFollowsRelation(a1, a2).relation_exists_by_label(eventually_follows_relations)
+               and not EventuallyFollowsRelation(a2, a1).relation_exists_by_label(eventually_follows_relations)
         ]
 
     def get_eventually_follows_relations_by_label(self):
@@ -103,14 +103,14 @@ class Trace:
                 EventuallyFollowsRelation(a1, a2)
                 for a1, a2 in product(self.activities, repeat=2)
                 for a3 in self.activities
-                if not Relation(a1, a2).exists_by_label(eventually_follows_relations)
-                   and Relation(a1, a3).exists_by_label(eventually_follows_relations)
-                   and Relation(a3, a2).exists_by_label(eventually_follows_relations)
+                if not Relation(a1, a2).relation_exists_by_label(eventually_follows_relations)
+                   and Relation(a1, a3).relation_exists_by_label(eventually_follows_relations)
+                   and Relation(a3, a2).relation_exists_by_label(eventually_follows_relations)
             ]
 
             if added_relations:
                 for relation in added_relations:
-                    if not relation.exists_by_label(eventually_follows_relations):
+                    if not relation.relation_exists_by_label(eventually_follows_relations):
                         eventually_follows_relations.append(relation)
         return eventually_follows_relations
 

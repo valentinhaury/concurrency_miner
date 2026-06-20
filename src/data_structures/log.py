@@ -31,7 +31,7 @@ class Log:
         for trace in self.traces:
             trace_relations = trace.get_eventually_follows_relations_by_label()
             for relation in trace_relations:
-                if not relation.exists_by_label(eventually_follows_relations):
+                if not relation.relation_exists_by_label(eventually_follows_relations):
                     eventually_follows_relations.append(relation)
 
         return eventually_follows_relations
@@ -41,7 +41,7 @@ class Log:
         for trace in self.traces:
             trace_relations = trace.get_overlapping_relations_by_label()
             for relation in trace_relations:
-                if not relation.exists_by_label(overlapping_relations):
+                if not relation.relation_exists_by_label(overlapping_relations):
                     overlapping_relations.append(relation)
 
         return overlapping_relations
@@ -51,7 +51,7 @@ class Log:
         for trace in self.traces:
             trace_activities = trace.get_activities()
             for activity in trace_activities:
-                if not activity.exists_by_label(activities):
+                if not activity.activity_exists_by_label(activities):
                     activities.append(activity)
 
         return activities
@@ -61,7 +61,7 @@ class Log:
         for trace in self.traces:
             trace_start_activities = trace.get_start_activities()
             for activity in trace_start_activities:
-                if not activity.exists_by_label(start_activities):
+                if not activity.activity_exists_by_label(start_activities):
                     start_activities.append(activity)
         return start_activities
 
@@ -70,6 +70,6 @@ class Log:
         for trace in self.traces:
             trace_end_activities = trace.get_end_activities()
             for activity in trace_end_activities:
-                if not activity.exists_by_label(end_activities):
+                if not activity.activity_exists_by_label(end_activities):
                     end_activities.append(activity)
         return end_activities

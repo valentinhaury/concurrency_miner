@@ -17,7 +17,7 @@ class Activity:
     def get_label(self):
         return self.label
 
-    def exists_by_label(self, activities):
+    def activity_exists_by_label(self, activities):
         count = 0
         occurrences = sum(
             1 for activity in activities
