@@ -3,11 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e3ce310f-a6cb-4654-8df9-4da22971cc3a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data_structures/log.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_structures/log.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data_structures/trace.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_structures/trace.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/log_creation/log_creator.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/log_creation/log_creator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/split_detection/detect_interleafing.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/split_detection/detect_interleafing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/split_detection/detect_arbitrary_order.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/split_detection/detect_arbitrary_order.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_arbitrary_order_detector.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_arbitrary_order_detector.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +74,8 @@
       <workItem from="1781596350578" duration="6184000" />
       <workItem from="1781682287803" duration="17567000" />
       <workItem from="1781850409995" duration="2538000" />
-      <workItem from="1781855310424" duration="9143000" />
+      <workItem from="1781855310424" duration="9937000" />
+      <workItem from="1781944024206" duration="722000" />
     </task>
     <servers />
   </component>
