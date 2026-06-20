@@ -7,8 +7,8 @@ from src.data_structures.overlapping_relation import OverlappingRelation
 
 
 def detect_arbitrary_order(log):
-    return len(create_arbitrary_order_partitions(log)) > 0
-#TODO CURRENTLY TRUE FOR ALL TEST LOGS (EXCEPT THE EMPTY LOG)
+    return len(create_arbitrary_order_partitions(log)) > 1
+
 def create_arbitrary_order_partitions(log):
     log_eventually_follows_relations = log.get_eventually_follows_relations_by_label()
     log_overlapping_relations =log.get_overlapping_relations_by_label()
@@ -17,13 +17,11 @@ def create_arbitrary_order_partitions(log):
 
     while activities:                                           #WHILE LOOP to create new partitions
         new_partition = [activities.pop()]
-
         changed = True
         while changed:                                          #WHILE LOOP to add all activities that belong to the new partition
             changed = False
 
             if not activities:
-                partitions.append(new_partition)
                 break
 
             activities_save = []
@@ -57,6 +55,7 @@ def create_arbitrary_order_partitions(log):
                         fully_connected_in_one_trace = True
                 if fully_connected_in_one_trace:
                     activity_added_to_partition = True
+
                     if not a2.activity_exists_by_label(new_partition):
                         new_partition.append(a2)                                    #Adding to partition if fully connected in one trace
                 if not activity_added_to_partition:
@@ -67,5 +66,6 @@ def create_arbitrary_order_partitions(log):
             activities = activities_save
 
         partitions.append(new_partition)
+
 
     return partitions
