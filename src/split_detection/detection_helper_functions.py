@@ -1,3 +1,5 @@
+from src.data_structures.eventually_follows_relation import EventuallyFollowsRelation
+from src.data_structures.overlapping_relation import OverlappingRelation
 from src.data_structures.directly_follows_relation import DirectlyFollowsRelation
 
 def are_in_loop(a1, a2, log):
@@ -9,9 +11,21 @@ def are_in_loop(a1, a2, log):
         return True
     return False
 
-def fully_connected(a1, a2, directly_follows_relations):
-    if (not DirectlyFollowsRelation(a1, a2).relation_exists_by_label(directly_follows_relations)
-     or not DirectlyFollowsRelation(a2, a1).relation_exists_by_label(directly_follows_relations)
+def fully_direct_connected(a1, a2, directly_follows_relations):
+    if (DirectlyFollowsRelation(a1, a2).relation_exists_by_label(directly_follows_relations)
+     and DirectlyFollowsRelation(a2, a1).relation_exists_by_label(directly_follows_relations)
      ):
-        return False
-    return True
+        return True
+    return False
+
+def fully_eventually_connected(a1, a2, eventually_follows_relations):
+    if (EventuallyFollowsRelation(a1, a2).relation_exists_by_label(eventually_follows_relations)
+        and EventuallyFollowsRelation(a2, a1).relation_exists_by_label(eventually_follows_relations)):
+        return True
+    return False
+
+def overlapping(a1, a2, overlapping_relations):
+    if (OverlappingRelation(a1, a2).relation_exists_by_label(overlapping_relations)
+        or OverlappingRelation(a2, a1).relation_exists_by_label(overlapping_relations)):
+        return True
+    return False

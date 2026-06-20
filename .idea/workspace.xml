@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e3ce310f-a6cb-4654-8df9-4da22971cc3a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/concurrency_miner.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/concurrency_miner.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/split_detection/detect_arbitrary_order.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/split_detection/detect_arbitrary_order.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/split_detection/detect_interleafing.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/split_detection/detect_interleafing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/split_detection/detection_helper_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/split_detection/detection_helper_functions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +76,7 @@
       <workItem from="1781682287803" duration="17567000" />
       <workItem from="1781850409995" duration="2538000" />
       <workItem from="1781855310424" duration="9937000" />
-      <workItem from="1781944024206" duration="2825000" />
+      <workItem from="1781944024206" duration="6466000" />
     </task>
     <servers />
   </component>

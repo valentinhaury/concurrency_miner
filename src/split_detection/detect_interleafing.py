@@ -1,5 +1,6 @@
 from src.data_structures.overlapping_relation import OverlappingRelation
-from src.split_detection.detection_helper_functions import are_in_loop, fully_connected
+from src.split_detection.detection_helper_functions import are_in_loop, fully_direct_connected, overlapping
+
 
 def detect_interleafing(log):
     return len(create_interleafing_partitions(log)) > 1
@@ -28,14 +29,14 @@ def create_interleafing_partitions(log):
                     length_activities = len(activities)
                     for i in range(length_activities):          #for all activities that are in no partition check to see if they should be added
                         a2 = activities.pop()
-                        if OverlappingRelation(a1, a2).relation_exists_by_label(overlapping_relations) or OverlappingRelation(a2, a1).relation_exists_by_label(overlapping_relations):
-                            if a2 not in partition:
+                        if overlapping(a1, a2, overlapping_relations):
+                            if not a2.activity_exists_by_label(partition):
                                 partition.append(a2)
-                        elif not fully_connected(a1, a2, directly_follows_relations):
-                            if a2 not in partition:
+                        elif not fully_direct_connected(a1, a2, directly_follows_relations):
+                            if not a2.activity_exists_by_label(partition):
                                 partition.append(a2)
                         elif are_in_loop(a1, a2, log):
-                            if a2 not in partition:
+                            if not a2.activity_exists_by_label(partition):
                                 partition.append(a2)
                         else:
                             activities_save.append(a2)
