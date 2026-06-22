@@ -6,16 +6,17 @@ from src.data_structures.log import Log
 from src.data_structures.trace import Trace
 from src.log_creation.log_creator import get_log
 from src.split_detection.detect_exclusive import detect_exclusive
-from src.split_detection.detect_sequence import detect_sequence
+from src.split_detection.detect_sequence import detect_sequence, create_sequence_partitions
+
 str_input = 'concurrent'
 test_log = get_log(str_input)
 print("activities")
 print(str(test_log.get_activities_by_label()))
 print("-----------------------------------------------------------------------------------------------------------")
-print(str(create_arbitrary_order_partitions(test_log)))
+print(str(create_sequence_partitions(test_log)))
 print("-----------------------------------------------------------------------------------------------------------")
 print("In Function prints: ")
-result = detect_arbitrary_order(test_log)
+result = detect_sequence(test_log)
 print("-----------------------------------------------------------------------------------------------------------")
 if result:
     print("---------------------------------------Found cut in " + str_input + "-log---------------------------------------")

@@ -24,6 +24,15 @@ def fully_eventually_connected(a1, a2, eventually_follows_relations):
         return True
     return False
 
+def eventually_connected_in_only_one_direction(a1, a2, eventually_follows_relations):
+    right = False
+    left = False
+    if EventuallyFollowsRelation(a1, a2).relation_exists_by_label(eventually_follows_relations):
+        right = True
+    if EventuallyFollowsRelation(a2, a1).relation_exists_by_label(eventually_follows_relations):
+        left = True
+    return right != left
+
 def overlapping(a1, a2, overlapping_relations):
     if (OverlappingRelation(a1, a2).relation_exists_by_label(overlapping_relations)
         or OverlappingRelation(a2, a1).relation_exists_by_label(overlapping_relations)):
