@@ -14,34 +14,28 @@ def create_interleafing_partitions(log):
     while activities:                                           #WHILE LOOP to create new partitions
         new_partition = [activities.pop()]
         partitions.append(new_partition)
-
         changed = True
-        while changed:                                          #WHILE LOOP to update partitions by adding activities until nothing changes
+        while changed:                                          #WHILE LOOP to update the new_partition by adding activities until nothing changes
             changed = False
-            if not activities:
-                break
-                                                                #TODO Maybe i just need to run the following for the new_partition and not for all partitions in partitions
-            for partition in partitions:                        #check all existing partitions
-                if not activities:
-                    break
-                for a1 in partition:                            #for all activities in the current partition check:
-                    activities_save = []
-                    length_activities = len(activities)
-                    for i in range(length_activities):          #for all activities that are in no partition check to see if they should be added
-                        a2 = activities.pop()
-                        if overlapping(a1, a2, overlapping_relations):
-                            if not a2.activity_exists_by_label(partition):
-                                partition.append(a2)
-                        elif not fully_direct_connected(a1, a2, directly_follows_relations):
-                            if not a2.activity_exists_by_label(partition):
-                                partition.append(a2)
-                        elif are_in_loop(a1, a2, log):
-                            if not a2.activity_exists_by_label(partition):
-                                partition.append(a2)
-                        else:
-                            activities_save.append(a2)
-                    if not length_activities == len(activities_save):
-                        changed = True
-                    activities = activities_save
+
+            for a1 in new_partition:                            #for all activities in the new_partition check:
+                activities_save = []
+                length_activities = len(activities)
+                for i in range(length_activities):          #for all activities that are in no partition check to see if they should be added
+                    a2 = activities.pop()
+                    if overlapping(a1, a2, overlapping_relations):
+                        if not a2.activity_exists_by_label(new_partition):
+                            new_partition.append(a2)
+                    elif not fully_direct_connected(a1, a2, directly_follows_relations):
+                        if not a2.activity_exists_by_label(new_partition):
+                            new_partition.append(a2)
+                    elif are_in_loop(a1, a2, log):
+                        if not a2.activity_exists_by_label(new_partition):
+                            new_partition.append(a2)
+                    else:
+                        activities_save.append(a2)
+                if not length_activities == len(activities_save):
+                    changed = True
+                activities = activities_save
 
     return partitions
