@@ -1,3 +1,4 @@
+from src.split_detection.detection_helper_functions import overlapping
 from src.data_structures.activity import Activity
 from src.data_structures.eventually_follows_relation import EventuallyFollowsRelation
 from src.data_structures.overlapping_relation import OverlappingRelation
@@ -15,7 +16,7 @@ def only_one_eventually_follows_relations_exist(activity, activities, eventually
 
 def overlapping_relation_exists(activity, activities, overlapping_relations):
     for a in activities:
-        if OverlappingRelation(a, activity).relation_exists_by_label(overlapping_relations):
+        if overlapping(a, activity, overlapping_relations):
             return True
     return False
 
@@ -40,3 +41,6 @@ def detect_sequence(log):
             partition.extend(new_partition)
 
     return len(partition) != len(activities)
+
+def create_sequence_partitions(log):
+    return True
