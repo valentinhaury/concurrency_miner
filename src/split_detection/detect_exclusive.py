@@ -3,22 +3,35 @@ from src.data_structures.trace import Trace
 
 
 def detect_exclusive(log):
-    if len(log.get_traces()) < 2:
-        return False
-    else:
-        all_traces = log.get_traces()
-        trace_partition = [all_traces[0]]
-        changed_partition = ["true"]
-        while changed_partition:
-            changed_partition = {
-                t2
-                for t1 in trace_partition
-                for t2 in all_traces
-                if t2 not in trace_partition
-                and not t1.has_disjunct_activities_to(t2)
-            }
-            trace_partition.extend(changed_partition)
-        if len(all_traces) == len(trace_partition):
-            return False
-        else:
-            return True
+    return len(create_exclusive_choice_partitions(log)) > 1
+
+def create_exclusive_choice_partitions(log):
+    traces = log.get_traces()
+    if len(traces) == 0:
+        return []
+    if len(traces) == 1:
+        return [[traces.pop()]]
+
+    trace_partitions = []
+
+    while traces:
+        trace_partition = [traces.pop()]
+        saved_traces = []
+        while traces:
+            t2 = traces.pop()
+            disjunct = True
+            for t1 in trace_partition:
+                if not t1.has_disjunct_activities_to(t2):
+                    disjunct = False
+            if not disjunct:
+                trace_partition.append(t2)
+            else:
+                saved_traces.append(t2)
+        traces = saved_traces
+        trace_partitions.append(trace_partition)
+
+    return trace_partitions
+
+
+
+
