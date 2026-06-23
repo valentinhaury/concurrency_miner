@@ -21,9 +21,9 @@ def create_concurrent_partitions(log):
                 a2 = activities.pop()
                 in_partition = False
                 for a1 in new_partition:  # for all activities in the new_partition check:
-                    if not overlapping(a1, a2, overlapping_relations):
+                    if not overlapping(a1, a2, overlapping_relations):  # if they are overlapping at least once
                         in_partition = True
-                    if not fully_direct_connected(a1, a2, directly_follows_relations):
+                    if not fully_direct_connected(a1, a2, directly_follows_relations):  # if they are connected in both directions
                         in_partition = True
                 if in_partition:
                     if not a2.activity_exists_by_label(new_partition):
