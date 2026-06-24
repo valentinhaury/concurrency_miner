@@ -52,6 +52,7 @@ def get_log(specifier):
         case "exclusive":       return log_exclusive()          # exclusive Log
         case "sequence":        return log_sequence()           # sequence log
         case "loop":            return log_loop()               # loop log
+        case "sequence_loop":   return log_loop_sequence()      # loop log
         case "arbitrary":       return log_arbitrary_order()    # arbitrary order log
         case "interleafing":    return log_interleafing()       # interleafing log
         case "concurrent":      return log_concurrent()         # concurrent log
@@ -77,6 +78,18 @@ def log_loop():
     a2 = a()
     b1 = b()
     trace_a = Trace([a1, a2, b1], [DirectlyFollowsRelation(a1, b1), DirectlyFollowsRelation(b1, a2)])
+    return Log([trace_a])
+
+def log_loop_sequence():
+    a1 = a()
+    b1 = b()
+    c1 = c()
+    d1 = d()
+    a2 = a()
+    b2 = b()
+    c2 = c()
+
+    trace_a = Trace([a1, c1, a2, c2, b1, b2, d1], [DirectlyFollowsRelation(a1, b1), DirectlyFollowsRelation(b1, c1), DirectlyFollowsRelation(c1, d1), DirectlyFollowsRelation(d1, a2), DirectlyFollowsRelation(a2, b2), DirectlyFollowsRelation(b2, c2)])
     return Log([trace_a])
 
 def log_arbitrary_order():
