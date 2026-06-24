@@ -9,6 +9,11 @@ from src.log_creation.log_creator import get_log
 from src.split_detection.detect_exclusive import detect_exclusive
 from src.split_detection.detect_sequence import detect_sequence, create_sequence_partitions
 
+
+
+#TODO for concurrent/interleafing cut : All partitions that have no start and no end activity should be merged with another partition
+# The reason is every partition should be able to start and end the trace if they are concurrent/interleafing
+
 str_input = 'sequence'
 test_log = get_log(str_input)
 #test_log = Log([])

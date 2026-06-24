@@ -2,10 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e3ce310f-a6cb-4654-8df9-4da22971cc3a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/tests/test_concurrent_detector.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_loop_detector.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/split_detection/detect_concurrent.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/split_detection/detect_concurrent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/split_detection/detect_loop.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/split_detection/detect_loop.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +80,8 @@
       <workItem from="1781944024206" duration="6518000" />
       <workItem from="1781975967899" duration="1420000" />
       <workItem from="1782108832650" duration="4737000" />
-      <workItem from="1782196646446" duration="1083000" />
+      <workItem from="1782196646446" duration="2168000" />
+      <workItem from="1782280123797" duration="1240000" />
     </task>
     <servers />
   </component>
@@ -99,6 +100,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/concurrency_miner$.coverage" NAME=" Coverage Results" MODIFIED="1781601132527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/concurrency_miner$main.coverage" NAME="main Coverage Results" MODIFIED="1782197676516" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/concurrency_miner$main.coverage" NAME="main Coverage Results" MODIFIED="1782198002874" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>
