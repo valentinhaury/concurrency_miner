@@ -15,6 +15,8 @@ class Trace:
         self.directly_follows_relations = directly_follows_relations
 
     def __str__(self):
+        if not self.activities:
+            return "(empty-trace)"
         trace_string = "(A{"
         if self.activities:
             for activity in self.activities:

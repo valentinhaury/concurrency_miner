@@ -3,6 +3,8 @@ class Log:
         self.traces = traces
 
     def __str__(self):
+        if not self.traces:
+            return "(empty-log)"
         string = "("
         for trace in self.traces:
             string += str(trace) + ",    "

@@ -5,6 +5,13 @@ from src.data_structures.trace import Trace
 def detect_exclusive(log):
     return len(create_exclusive_choice_partitions(log)) > 1
 
+def get_exclusive_choice_sublogs(log):
+    partitions = create_exclusive_choice_partitions(log)
+    sublogs = []
+    for partition in partitions:
+        sublogs.append(Log(partition))
+    return sublogs
+
 def create_exclusive_choice_partitions(log):
     traces = log.get_traces()
     if len(traces) == 0:
