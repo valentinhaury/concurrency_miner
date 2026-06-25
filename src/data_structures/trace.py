@@ -30,10 +30,10 @@ class Trace:
         trace_string += "})"
         return trace_string
 
-    def append_activity(self, activity):
+    def add_activity(self, activity):
         self.activities.append(activity)
 
-    def append_directly_follows_relation(self, relation):
+    def add_directly_follows_relation(self, relation):
         self.directly_follows_relations.append(relation)
 
     def is_empty_trace(self):
