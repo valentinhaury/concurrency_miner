@@ -2,7 +2,6 @@ from src.data_structures import directly_follows_relation
 from src.data_structures.directly_follows_relation import DirectlyFollowsRelation
 from src.split_detection.detection_helper_functions import eventually_connected
 
-
 def detect_loop(log):
     return len(create_loop_partitions(log)) > 1
 
@@ -24,7 +23,6 @@ def create_loop_partitions(log):
             saved_activities.append(activity)
     activities = saved_activities
 
-
 #merge activities to p1 if they can be directly reached from a start-activity that is no end-activity
 #   or if and end-activity that is no start-activity can be directly reached from there
     saved_activities = []
@@ -32,12 +30,14 @@ def create_loop_partitions(log):
         merge = False
         for start_activity in start_activities:
             if not start_activity.activity_exists_by_label(end_activities):
-                if DirectlyFollowsRelation(start_activity, activity):
+                if DirectlyFollowsRelation(start_activity, activity).relation_exists_by_label(directly_follows_relations):
+                    print("start" + str(start_activity) + " --> " + str(activity) + " exists")
                     merge = True
         for end_activity in end_activities:
             if not end_activity.activity_exists_by_label(start_activities):
-                if DirectlyFollowsRelation(activity, end_activity):
+                if DirectlyFollowsRelation(activity, end_activity).relation_exists_by_label(directly_follows_relations):
                     merge = True
+                    print(str(activity) + " --> " + "end" + str(end_activity) + " exists")
         if merge:
             partition_1.append(activity)
         else:

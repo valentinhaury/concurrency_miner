@@ -10,14 +10,9 @@ from src.split_detection.detect_exclusive import detect_exclusive
 from src.split_detection.detect_sequence import detect_sequence, create_sequence_partitions
 from src.split_detection.detect_loop import detect_loop, create_loop_partitions
 
-
-
 #TODO for concurrent/interleafing cut : All partitions that have no start and no end activity should be merged with another partition
-# The reason is every partition should be able to start and end the trace if they are concurrent/interleafing
+# The reason is that every partition should be able to start and end the trace if they are concurrent/interleafing
 
-
-
-#TODO hier sollte ein cut gefunden werden -> d sollte in einer eigenen Partition landen
 str_input = 'sequence_loop'
 test_log = get_log(str_input)
 #test_log = Log([])
