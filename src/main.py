@@ -1,7 +1,7 @@
 from src.split_detection.detect_concurrent import create_concurrent_partitions, detect_concurrent
 from src.data_structures.directly_follows_relation import DirectlyFollowsRelation
 from src.split_detection.detect_arbitrary_order import detect_arbitrary_order, create_arbitrary_order_partitions
-from src.split_detection.detect_interleafing import detect_interleafing
+from src.split_detection.detect_interleafing import detect_interleafing, get_interleafing_sublogs
 from src.data_structures.activity import Activity
 from src.data_structures.log import Log
 from src.data_structures.trace import Trace
@@ -13,7 +13,7 @@ from src.split_detection.detect_loop import detect_loop, create_loop_partitions
 #TODO for concurrent/interleafing cut : All partitions that have no start and no end activity should be merged with another partition
 # The reason is that every partition should be able to start and end the trace if they are concurrent/interleafing
 
-str_input = 'sequence'
+str_input = 'interleafing'
 test_log = get_log(str_input)
 #test_log = Log([])
 print("log: " + str(test_log))
@@ -21,7 +21,7 @@ print("activities")
 print(str(test_log.get_activities_by_label()))
 print("-----------------------------------------------------------------------------------------------------------")
 
-for log in get_sequence_sublogs(test_log):
+for log in get_interleafing_sublogs(test_log):
     print("log: " + str(log))
 print("-----------------------------------------------------------------------------------------------------------")
 if False:
