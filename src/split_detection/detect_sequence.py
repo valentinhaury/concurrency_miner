@@ -1,8 +1,7 @@
-from data_structures.eventually_follows_relation import EventuallyFollowsRelation
+from src.data_structures.eventually_follows_relation import EventuallyFollowsRelation
 from src.data_structures.activity import Activity
 from src.data_structures.log import Log
 from src.data_structures.relation import Relation
-from src.data_structures.trace import Trace
 from src.data_structures.trace import Trace
 from src.split_detection.detection_helper_functions import eventually_connected_in_only_one_direction, overlapping
 
@@ -28,7 +27,6 @@ def get_sequence_sublogs(log):
     return _sort_sublogs(sublogs, log.get_eventually_follows_relations_by_label())
 
 def _sort_sublogs(sublogs, eventually_follows_relations):
-
     n = len(sublogs)
     for i in range(n-1):
       swapped = False
