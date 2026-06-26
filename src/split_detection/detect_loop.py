@@ -1,6 +1,6 @@
 from src.data_structures import directly_follows_relation
 from src.data_structures.directly_follows_relation import DirectlyFollowsRelation
-from src.split_detection.detection_helper_functions import eventually_connected
+from src.split_detection.helper_functions import eventually_connected
 
 def detect_loop(log):
     return len(create_loop_partitions(log)) > 1

@@ -3,7 +3,7 @@ from src.data_structures.activity import Activity
 from src.data_structures.log import Log
 from src.data_structures.relation import Relation
 from src.data_structures.trace import Trace
-from src.split_detection.detection_helper_functions import eventually_connected_in_only_one_direction, overlapping
+from src.split_detection.helper_functions import eventually_connected_in_only_one_direction, overlapping
 
 def detect_sequence(log):
     return len(create_sequence_partitions(log)) > 1

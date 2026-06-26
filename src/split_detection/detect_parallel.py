@@ -1,5 +1,5 @@
 from src.data_structures.trace import Trace
-from src.split_detection.detection_helper_functions import overlapping
+from src.split_detection.helper_functions import overlapping
 
 
 def detect_parallel(log):

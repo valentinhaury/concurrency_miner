@@ -1,4 +1,4 @@
-from src.split_detection.detection_helper_functions import fully_direct_connected, overlapping
+from src.split_detection.helper_functions import fully_direct_connected, overlapping
 
 
 def detect_concurrent(log):
