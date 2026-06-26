@@ -86,15 +86,29 @@ class Trace:
         return dfg_by_label
 
     def get_overlapping_relations_by_label(self):
-        eventually_follows_relations = self.get_eventually_follows_relations_by_label()
+        overlapping_by_label = []
+        for relation in self.get_overlapping_relations_by_id():
+            if not relation.relation_exists_by_label(overlapping_by_label):
+                overlapping_by_label.append(relation)
+        return overlapping_by_label
+
+    def get_overlapping_relations_by_id(self):
+        eventually_follows_relations = self.get_eventually_follows_relations_by_id()
         return [
             OverlappingRelation(a1, a2)
             for a1, a2 in product(self.activities, repeat = 2)
-            if not EventuallyFollowsRelation(a1, a2).relation_exists_by_label(eventually_follows_relations)
-               and not EventuallyFollowsRelation(a2, a1).relation_exists_by_label(eventually_follows_relations)
+            if not EventuallyFollowsRelation(a1, a2).relation_exists_by_id(eventually_follows_relations)
+               and not EventuallyFollowsRelation(a2, a1).relation_exists_by_id(eventually_follows_relations)
         ]
 
     def get_eventually_follows_relations_by_label(self):
+        eventually_follows_by_label = []
+        for relation in self.get_eventually_follows_relations_by_id():
+            if not relation.relation_exists_by_label(eventually_follows_by_label):
+                eventually_follows_by_label.append(relation)
+        return eventually_follows_by_label
+
+    def get_eventually_follows_relations_by_id(self):
         eventually_follows_relations = []
         for relation in self.directly_follows_relations:
            eventually_follows_relations.append(EventuallyFollowsRelation(relation.get_first_activity(), relation.get_second_activity()))
@@ -105,14 +119,14 @@ class Trace:
                 EventuallyFollowsRelation(a1, a2)
                 for a1, a2 in product(self.activities, repeat=2)
                 for a3 in self.activities
-                if not Relation(a1, a2).relation_exists_by_label(eventually_follows_relations)
-                   and Relation(a1, a3).relation_exists_by_label(eventually_follows_relations)
-                   and Relation(a3, a2).relation_exists_by_label(eventually_follows_relations)
+                if not Relation(a1, a2).relation_exists_by_id(eventually_follows_relations)
+                   and Relation(a1, a3).relation_exists_by_id(eventually_follows_relations)
+                   and Relation(a3, a2).relation_exists_by_id(eventually_follows_relations)
             ]
 
             if added_relations:
                 for relation in added_relations:
-                    if not relation.relation_exists_by_label(eventually_follows_relations):
+                    if not relation.relation_exists_by_id(eventually_follows_relations):
                         eventually_follows_relations.append(relation)
         return eventually_follows_relations
 
