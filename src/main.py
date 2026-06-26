@@ -16,10 +16,13 @@ from src.split_detection.detect_loop import detect_loop, create_loop_partitions
 #TODO for concurrent/interleafing cut : All partitions that have no start and no end activity should be merged with another partition
 # The reason is that every partition should be able to start and end the trace if they are concurrent/interleafing
 # maybe its already implemented in the are_in_loop
+
+#Saturday
 #TODO loop log splitting
 #TODO Multi-Instance Operator - maybe just check in the beginning and then remember them and replace them at the end with MI(a)
 #TODO Connect all the Mining elements
-#TODO Tree to traces - parser -> Given a tree returns a Log with all possible Traces
+#Sunday
+#TODO Tree to traces - parser -> Given a tree returns a Log with all possible Traces -> Good to create Testcases
 
 
 str_input = 'sequence'
