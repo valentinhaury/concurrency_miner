@@ -1,12 +1,15 @@
 from src.data_structures.trace import Trace
-from src.split_detection.helper_functions import overlapping
+from src.split_detection.helper_functions import overlapping, create_sublogs_concurrent
 
 
 def detect_parallel(log):
     return len(create_parallel_partitions(log)) > 1
 
+def get_parallel_sublogs(log):
+    partitions = create_parallel_partitions(log)
+    return create_sublogs_concurrent(log, partitions)
+
 def create_parallel_partitions(log):
-    overlapping_relations = log.get_overlapping_relations_by_label()
     activities = log.get_activities_by_label()
     traces = log.get_traces()
     partitions = []

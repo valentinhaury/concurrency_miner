@@ -3,28 +3,17 @@ from src.data_structures.activity import Activity
 from src.data_structures.log import Log
 from src.data_structures.relation import Relation
 from src.data_structures.trace import Trace
-from src.split_detection.helper_functions import eventually_connected_in_only_one_direction, overlapping
+from src.split_detection.helper_functions import eventually_connected_in_only_one_direction, overlapping, \
+    create_sublogs_sequential
+
 
 def detect_sequence(log):
     return len(create_sequence_partitions(log)) > 1
 
 def get_sequence_sublogs(log):
     partitions = create_sequence_partitions(log)
-    sublogs = []
-    for partition in partitions:
-        sub_log = []
-        for trace in log.get_traces():
-            new_trace = Trace()
-            for activity in trace.activities:
-                if activity.activity_exists_by_label(partition):
-                    new_trace.add_activity(activity)
-            for relation in trace.get_directly_follows_relations():
-                if relation.get_first_activity().activity_exists_by_label(new_trace.get_activities()) and relation.get_second_activity().activity_exists_by_label(new_trace.get_activities()):
-                    new_trace.add_directly_follows_relation(relation)
-            sub_log.append(new_trace)
-        sublogs.append(Log(sub_log))
 
-    return _sort_sublogs(sublogs, log.get_eventually_follows_relations_by_label())
+    return _sort_sublogs(create_sublogs_sequential(log, partitions), log.get_eventually_follows_relations_by_label())
 
 def _sort_sublogs(sublogs, eventually_follows_relations):
     n = len(sublogs)

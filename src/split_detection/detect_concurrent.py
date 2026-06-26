@@ -1,8 +1,12 @@
-from src.split_detection.helper_functions import fully_direct_connected, overlapping
+from src.split_detection.helper_functions import fully_direct_connected, overlapping, create_sublogs_concurrent
 
 
 def detect_concurrent(log):
     return len(create_concurrent_partitions(log)) > 1
+
+def get_concurrent_sublogs(log):
+    partitions = create_concurrent_partitions(log)
+    return create_sublogs_concurrent(log, partitions)
 
 def create_concurrent_partitions(log):
     directly_follows_relations = log.get_directly_follows_relations_by_label()
