@@ -4,7 +4,7 @@
     <list default="true" id="e3ce310f-a6cb-4654-8df9-4da22971cc3a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data_structures/trace.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_structures/trace.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/split_detection/detect_interleafing.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/split_detection/detect_interleafing.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/split_detection/detect_sequence.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/split_detection/detect_sequence.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -28,12 +28,12 @@
     &quot;assignee&quot;: &quot;valentinhaury&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/valentinhaury/concurrency_miner.git",
-    "accountId": "e049adfe-2001-4eb6-a12a-575edef2d72d"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/valentinhaury/concurrency_miner.git&quot;,
+    &quot;accountId&quot;: &quot;e049adfe-2001-4eb6-a12a-575edef2d72d&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -81,7 +81,8 @@
       <workItem from="1781975967899" duration="1420000" />
       <workItem from="1782108832650" duration="4737000" />
       <workItem from="1782196646446" duration="2168000" />
-      <workItem from="1782280123797" duration="12231000" />
+      <workItem from="1782280123797" duration="14114000" />
+      <workItem from="1782455722404" duration="2174000" />
     </task>
     <servers />
   </component>
@@ -100,6 +101,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/concurrency_miner$.coverage" NAME=" Coverage Results" MODIFIED="1781601132527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/concurrency_miner$main.coverage" NAME="main Coverage Results" MODIFIED="1782375963871" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/concurrency_miner$main.coverage" NAME="main Coverage Results" MODIFIED="1782376684518" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>
