@@ -24,11 +24,11 @@ def get_interleafing_sublogs(log):
                     new_trace.add_directly_follows_relation(relation)
             for a1 in new_trace.get_activities():
                 for a2 in new_trace.get_activities():
-                    if EventuallyFollowsRelation(a1, a2).relation_exists_by_id(eventually_follows_relation_id):
+                    if EventuallyFollowsRelation(a1, a2).relation_exists_by_id(eventually_follows_relation_id)\
+                        and not OverlappingRelation(a1, a2).relation_exists_by_id(trace.get_overlapping_relations_by_id()):
                         for a3 in new_trace.get_activities():
                             if  not (EventuallyFollowsRelation(a1, a3).relation_exists_by_id(eventually_follows_relation_id)
                                     and EventuallyFollowsRelation(a3, a2).relation_exists_by_id(eventually_follows_relation_id))\
-                                and not OverlappingRelation(a1, a2).relation_exists_by_id(trace.get_overlapping_relations_by_id())\
                                 and not EventuallyFollowsRelation(a1, a2).relation_exists_by_id(new_trace.get_eventually_follows_relations_by_id()):
                                 new_trace.add_directly_follows_relation(DirectlyFollowsRelation(a1, a2))
             sub_log.append(new_trace)
