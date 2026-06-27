@@ -11,12 +11,6 @@ def detect_loop(log):
 
 def get_loop_sublogs(log):
     partitions = create_loop_partitions(log)
-    #TODO Für jeden Trace subtraces erzeugen, sodass jeder subtrace genau einen zusammenhängenden block enthält
-    # zB für A(a1, b, a2) R(a1->b, b->a2)       :: A(a1)R() A(b)R() A(a2)R()
-    # für A(a1, b, c, a2) R(a1->b, b->c, c->a2) :: A(a1)R() A(b, c)R(b->c) A(a2)R()
-    # IDEE: für alle aktivitäten die in der partition sind, die zusammenfügen die in eine beliebige Richtung directly verbunden sind
-    #            oder overlapping
-    #   Dann die relations hinzufügen, bei denen beide aktivitäten in diesem trace gelandet sind
     sublogs = []
     for partition in partitions:
         new_sublog = Log([])

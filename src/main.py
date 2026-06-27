@@ -20,7 +20,6 @@ from src.split_detection.detect_loop import detect_loop, create_loop_partitions,
 # maybe its already implemented in the are_in_loop
 
 #Saturday
-#TODO loop log splitting
 #TODO Multi-Instance Operator - maybe just check in the beginning and then remember them and replace them at the end with MI(a)
 #TODO Connect all the Mining elements
 #Sunday
