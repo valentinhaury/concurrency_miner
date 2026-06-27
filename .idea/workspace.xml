@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e3ce310f-a6cb-4654-8df9-4da22971cc3a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/split_detection/detect_loop.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/split_detection/detect_loop.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/split_detection/helper_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/split_detection/helper_functions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +81,8 @@
       <workItem from="1782108832650" duration="4737000" />
       <workItem from="1782196646446" duration="2168000" />
       <workItem from="1782280123797" duration="14114000" />
-      <workItem from="1782455722404" duration="9046000" />
+      <workItem from="1782455722404" duration="9076000" />
+      <workItem from="1782538761269" duration="2144000" />
     </task>
     <servers />
   </component>

@@ -20,6 +20,13 @@ def fully_direct_connected(a1, a2, directly_follows_relations):
         return True
     return False
 
+def direct_connected_id(a1, a2, directly_follows_relations):
+    if (DirectlyFollowsRelation(a1, a2).relation_exists_by_id(directly_follows_relations)
+     or DirectlyFollowsRelation(a2, a1).relation_exists_by_id(directly_follows_relations)
+     ):
+        return True
+    return False
+
 def fully_eventually_connected(a1, a2, eventually_follows_relations):
     if (EventuallyFollowsRelation(a1, a2).relation_exists_by_label(eventually_follows_relations)
         and EventuallyFollowsRelation(a2, a1).relation_exists_by_label(eventually_follows_relations)):

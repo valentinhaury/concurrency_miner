@@ -6,6 +6,9 @@ class Relation:
     def __str__(self):
         return "(" + str(self.first_activity) + "R" + str(self.second_activity) + ")"
 
+    def __repr__(self):
+        return "(" + repr(self.first_activity) + "R" + repr(self.second_activity) + ")"
+
     def relation_exists_by_label(self, relations):
         for relation in relations:
             same_first = self.first_activity.get_label() == relation.get_first_activity().get_label()

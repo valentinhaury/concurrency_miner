@@ -99,6 +99,7 @@ class Trace:
             for a1, a2 in product(self.activities, repeat = 2)
             if not EventuallyFollowsRelation(a1, a2).relation_exists_by_id(eventually_follows_relations)
                and not EventuallyFollowsRelation(a2, a1).relation_exists_by_id(eventually_follows_relations)
+               and not a1 == a2
         ]
 
     def get_eventually_follows_relations_by_label(self):

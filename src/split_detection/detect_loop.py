@@ -1,9 +1,65 @@
+from src.data_structures.relation import Relation
+from src.data_structures.log import Log
+from src.data_structures.trace import Trace
 from src.data_structures import directly_follows_relation
 from src.data_structures.directly_follows_relation import DirectlyFollowsRelation
-from src.split_detection.helper_functions import eventually_connected
+from src.split_detection.helper_functions import eventually_connected, direct_connected_id, overlapping
+
 
 def detect_loop(log):
     return len(create_loop_partitions(log)) > 1
+
+def get_loop_sublogs(log):
+    partitions = create_loop_partitions(log)
+    #TODO Für jeden Trace subtraces erzeugen, sodass jeder subtrace genau einen zusammenhängenden block enthält
+    # zB für A(a1, b, a2) R(a1->b, b->a2)       :: A(a1)R() A(b)R() A(a2)R()
+    # für A(a1, b, c, a2) R(a1->b, b->c, c->a2) :: A(a1)R() A(b, c)R(b->c) A(a2)R()
+    # IDEE: für alle aktivitäten die in der partition sind, die zusammenfügen die in eine beliebige Richtung directly verbunden sind
+    #            oder overlapping
+    #   Dann die relations hinzufügen, bei denen beide aktivitäten in diesem trace gelandet sind
+    sublogs = []
+    for partition in partitions:
+        new_sublog = Log([])
+        for trace in log.get_traces():
+            trace_directly_follows_relation = trace.get_directly_follows_relations()
+            trace_overlapping_relation = trace.get_overlapping_relations_by_id()
+
+            activities = trace.get_activities()
+            partition_activities = []
+            for activity in activities:
+                if activity.activity_exists_by_label(partition):
+                    partition_activities.append(activity)
+
+            while partition_activities:
+                new_trace = Trace()
+                changed = True
+                while changed:
+                    changed = False
+                    saved_activities = []
+                    for i in range(len(partition_activities)):
+                        a1 = partition_activities.pop()
+                        added = False
+                        if not new_trace.get_activities():
+                            new_trace.add_activity(a1)
+                            added = True
+                        else:
+                            for a2 in new_trace.get_activities():
+                                if direct_connected_id(a1, a2, trace_directly_follows_relation) or overlapping(a1, a2, trace_overlapping_relation):
+                                    new_trace.add_activity(a1)
+                                    changed = True
+                                    added = True
+                                    break
+                        if not added:
+                            saved_activities.append(a1)
+                    partition_activities = saved_activities
+                new_trace_activities = new_trace.get_activities()
+                for relation in trace_directly_follows_relation:
+                    if relation.get_first_activity() in new_trace_activities and relation.get_second_activity() in new_trace_activities:
+                        new_trace.add_directly_follows_relation(relation)
+                new_sublog.add_trace(new_trace)
+        sublogs.append(new_sublog)
+
+    return sublogs
 
 def create_loop_partitions(log):
     activities = log.get_activities_by_label()
@@ -31,13 +87,11 @@ def create_loop_partitions(log):
         for start_activity in start_activities:
             if not start_activity.activity_exists_by_label(end_activities):
                 if DirectlyFollowsRelation(start_activity, activity).relation_exists_by_label(directly_follows_relations):
-                    print("start" + str(start_activity) + " --> " + str(activity) + " exists")
                     merge = True
         for end_activity in end_activities:
             if not end_activity.activity_exists_by_label(start_activities):
                 if DirectlyFollowsRelation(activity, end_activity).relation_exists_by_label(directly_follows_relations):
                     merge = True
-                    print(str(activity) + " --> " + "end" + str(end_activity) + " exists")
         if merge:
             partition_1.append(activity)
         else:
