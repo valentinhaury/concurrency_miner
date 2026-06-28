@@ -17,18 +17,17 @@ from src.split_detection.detect_sequence import detect_sequence, create_sequence
 from src.split_detection.detect_loop import detect_loop, create_loop_partitions, get_loop_sublogs
 
 #TODO for concurrent/interleafing cut : All partitions that have no start and no end activity should be merged with another partition
-# The reason is that every partition should be able to start and end the trace if they are concurrent/interleafing
-# maybe its already implemented in the are_in_loop
-# look into minimum self distance relationship
+#   The reason is that every partition should be able to start and end the trace if they are concurrent/interleafing
+#   maybe its already implemented in the are_in_loop
+#   look into minimum self distance relationship
 
-#Saturday
-#TODO Multi-Instance Operator - maybe just check in the beginning and then remember them and replace them at the end with MI(a)
-#TODO Connect all the Mining elements
-#Sunday
+#TODO look into tau/silent-activity when there are empty trace
+#   and also look into where empty traces can and should be created
+
 #TODO Tree to traces - parser -> Given a tree returns a Log with all possible Traces -> Good to create Testcases
 
 
-str_input = 'sequence_loop'
+str_input = 'arbitrary'
 test_log = get_log(str_input)
 #test_log = Log([])
 
