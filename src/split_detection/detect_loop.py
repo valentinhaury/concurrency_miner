@@ -1,3 +1,5 @@
+import copy
+
 from src.data_structures.relation import Relation
 from src.data_structures.log import Log
 from src.data_structures.trace import Trace
@@ -55,7 +57,8 @@ def get_loop_sublogs(log):
 
     return sublogs
 
-def create_loop_partitions(log):
+def create_loop_partitions(event_log):
+    log = copy.deepcopy(event_log)
     activities = log.get_activities_by_label()
     start_activities = log.get_start_activities_by_label()
     end_activities = log.get_end_activities_by_label()

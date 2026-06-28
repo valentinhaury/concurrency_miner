@@ -1,7 +1,8 @@
-from data_structures.relation import Relation
-from data_structures.trace import Trace
-from split_detection.detect_arbitrary_order import get_arbitrary_order_sublogs
-from split_detection.detect_parallel import get_parallel_sublogs
+from src.concurrency_miner import concurrency_miner
+from src.data_structures.relation import Relation
+from src.data_structures.trace import Trace
+from src.split_detection.detect_arbitrary_order import get_arbitrary_order_sublogs
+from src.split_detection.detect_parallel import get_parallel_sublogs
 from src.split_detection.detect_concurrent import create_concurrent_partitions, detect_concurrent, \
     get_concurrent_sublogs
 from src.data_structures.directly_follows_relation import DirectlyFollowsRelation
@@ -31,15 +32,24 @@ str_input = 'sequence_loop'
 test_log = get_log(str_input)
 #test_log = Log([])
 
+if detect_sequence(test_log):
+    print("s detected")
+else:
+    print("s not detected")
+
+print("-----------------------------------------------------------------------------------------------------------")
+process_tree = concurrency_miner(test_log)
+print(str(process_tree))
+print("-----------------------------------------------------------------------------------------------------------")
 print("log: " + str(test_log))
-print("activities")
+print("activities: ")
 print(str(test_log.get_activities_by_label()))
 print("-----------------------------------------------------------------------------------------------------------")
-
-for log in get_loop_sublogs(test_log):
-    print("log: " + str(log))
-print("-----------------------------------------------------------------------------------------------------------")
 if False:
+    for log in get_loop_sublogs(test_log):
+        print("log: " + str(log))
+    print("-----------------------------------------------------------------------------------------------------------")
+
     print(str(create_loop_partitions(test_log)))
     print("-----------------------------------------------------------------------------------------------------------")
     print("In Function prints: ")

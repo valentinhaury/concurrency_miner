@@ -1,3 +1,5 @@
+import copy
+
 from src.split_detection.helper_functions import fully_direct_connected, overlapping, create_sublogs_concurrent
 
 
@@ -8,7 +10,8 @@ def get_concurrent_sublogs(log):
     partitions = create_concurrent_partitions(log)
     return create_sublogs_concurrent(log, partitions)
 
-def create_concurrent_partitions(log):
+def create_concurrent_partitions(event_log):
+    log = copy.deepcopy(event_log)
     directly_follows_relations = log.get_directly_follows_relations_by_label()
     overlapping_relations = log.get_overlapping_relations_by_label()
     activities = log.get_activities_by_label()

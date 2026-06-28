@@ -1,3 +1,5 @@
+import copy
+
 from src.data_structures.trace import Trace
 from src.split_detection.helper_functions import fully_eventually_connected, create_sublogs_sequential
 from src.data_structures.eventually_follows_relation import EventuallyFollowsRelation
@@ -14,8 +16,8 @@ def get_arbitrary_order_sublogs(log):
     partitions = create_arbitrary_order_partitions(log)
     return create_sublogs_sequential(log, partitions)
 
-
-def create_arbitrary_order_partitions(log):
+def create_arbitrary_order_partitions(event_log):
+    log = copy.deepcopy(event_log)
     log_eventually_follows_relations = log.get_eventually_follows_relations_by_label()
     log_overlapping_relations =log.get_overlapping_relations_by_label()
     partitions = []

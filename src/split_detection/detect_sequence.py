@@ -1,3 +1,5 @@
+import copy
+
 from src.data_structures.eventually_follows_relation import EventuallyFollowsRelation
 from src.data_structures.activity import Activity
 from src.data_structures.log import Log
@@ -39,7 +41,8 @@ def _follows(log_a, log_b, eventually_follows_relations):
 
 
 
-def create_sequence_partitions(log):
+def create_sequence_partitions(event_log):
+    log = copy.deepcopy(event_log)
     eventually_follows_relations = log.get_eventually_follows_relations_by_label()
     overlapping_relations = log.get_overlapping_relations_by_label()
     activities = log.get_activities_by_label()

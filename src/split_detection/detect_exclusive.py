@@ -1,3 +1,5 @@
+import copy
+
 from src.data_structures.log import Log
 from src.data_structures.trace import Trace
 
@@ -12,7 +14,8 @@ def get_exclusive_choice_sublogs(log):
         sublogs.append(Log(partition))
     return sublogs
 
-def create_exclusive_choice_partitions(log):
+def create_exclusive_choice_partitions(event_log):
+    log = copy.deepcopy(event_log)
     traces = log.get_traces()
     if len(traces) == 0:
         return []

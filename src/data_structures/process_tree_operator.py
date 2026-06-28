@@ -8,4 +8,5 @@ class Operator(Enum):
     Interleafing = "\u2227"
     Concurrent = "||"
     Parallel ="//"
+    Multi = "*"
 #op.value für das Symbol

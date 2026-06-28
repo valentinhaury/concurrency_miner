@@ -1,3 +1,5 @@
+import copy
+
 from src.data_structures.directly_follows_relation import DirectlyFollowsRelation
 from src.data_structures.eventually_follows_relation import EventuallyFollowsRelation
 from src.data_structures.log import Log
@@ -14,7 +16,8 @@ def get_interleafing_sublogs(log):
     partitions = create_interleafing_partitions(log)
     return create_sublogs_concurrent(log, partitions)
 
-def create_interleafing_partitions(log):
+def create_interleafing_partitions(event_log):
+    log = copy.deepcopy(event_log)
     directly_follows_relations = log.get_directly_follows_relations_by_label()
     overlapping_relations = log.get_overlapping_relations_by_label()
     activities = log.get_activities_by_label()
