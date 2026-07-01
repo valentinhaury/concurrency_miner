@@ -12,19 +12,25 @@ from src.log_creation.log_creator import get_log
 #TODO look into tau/silent-activities/optional-activities when there are empty trace
 #   and also look into where empty traces can and should be created
 
+#TODO Fallthroughs, infrequent etc.
+
 #TODO Tree to traces - parser -> Given a tree returns a Log with all possible Traces -> Good to create Testcases
 
 
-str_input = 'arbitrary'
-#test_log = get_log(str_input)
-test_log = Log([Trace([],[])])
+
+
+
+
+
+
+str_input = 'exclusive' # exclusive sequence arbitrary interleafing concurrent parallel loop
+test_log = get_log(str_input)
 
 print("-----------------------------------------------------------------------------------------------------------")
+print("Discovered Tree")
 process_tree = concurrency_miner(test_log)
 print(str(process_tree))
 print("-----------------------------------------------------------------------------------------------------------")
-print("log: " + str(test_log))
-print("activities: ")
-print(str(test_log.get_activities_by_label()))
+print("Input Log")
+print(str(test_log))
 print("-----------------------------------------------------------------------------------------------------------")
-
