@@ -5,8 +5,8 @@ class Operator(Enum):
     Sequence = "\u2192"
     Loop = "\u27f3"
     Arbitrary = "\u2194"
-    Interleafing = "\u2227"
-    Concurrent = "||"
-    Parallel ="//"
+    Interleafing = "\u29E2"
+    Concurrent = "\u2227"
+    Parallel ="||"
     Multi = "*"
 #op.value für das Symbol
