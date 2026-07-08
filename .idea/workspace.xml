@@ -3,7 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="e3ce310f-a6cb-4654-8df9-4da22971cc3a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data_structures/process_tree_operator.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_structures/process_tree_operator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data_structures/log.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_structures/log.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data_structures/trace.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_structures/trace.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/split_detection/detect_arbitrary_order.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/split_detection/detect_arbitrary_order.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/split_detection/helper_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/split_detection/helper_functions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +88,9 @@
       <workItem from="1782538761269" duration="5349000" />
       <workItem from="1782625635804" duration="6194000" />
       <workItem from="1782895176136" duration="3155000" />
-      <workItem from="1782983286916" duration="27000" />
+      <workItem from="1782983286916" duration="151000" />
+      <workItem from="1782985699223" duration="1260000" />
+      <workItem from="1783487603355" duration="6456000" />
     </task>
     <servers />
   </component>
@@ -93,6 +99,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/concurrency_miner$.coverage" NAME=" Coverage Results" MODIFIED="1781601132527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/concurrency_miner$main.coverage" NAME="main Coverage Results" MODIFIED="1782895889727" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/concurrency_miner$main.coverage" NAME="main Coverage Results" MODIFIED="1783496400627" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>

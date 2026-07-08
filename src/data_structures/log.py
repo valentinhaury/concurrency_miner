@@ -1,3 +1,5 @@
+from src.data_structures.activity import Activity
+
 class Log:
     def __init__(self, traces):
         self.traces = traces
@@ -54,7 +56,7 @@ class Log:
             trace_activities = trace.get_activities()
             for activity in trace_activities:
                 if not activity.activity_exists_by_label(activities):
-                    activities.append(activity)
+                    activities.append(Activity(activity.get_label()))
 
         return activities
 
@@ -64,7 +66,7 @@ class Log:
             trace_start_activities = trace.get_start_activities()
             for activity in trace_start_activities:
                 if not activity.activity_exists_by_label(start_activities):
-                    start_activities.append(activity)
+                    start_activities.append(Activity(activity.get_label()))
         return start_activities
 
     def get_end_activities_by_label(self):
@@ -73,5 +75,5 @@ class Log:
             trace_end_activities = trace.get_end_activities()
             for activity in trace_end_activities:
                 if not activity.activity_exists_by_label(end_activities):
-                    end_activities.append(activity)
+                    end_activities.append(Activity(activity.get_label()))
         return end_activities

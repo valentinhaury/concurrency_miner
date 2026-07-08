@@ -1,7 +1,9 @@
 import copy
+from itertools import combinations
 
 from src.data_structures.trace import Trace
-from src.split_detection.helper_functions import fully_eventually_connected, create_sublogs_sequential
+from src.split_detection.helper_functions import create_sublogs_sequential, \
+    connect_partitions, fully_eventually_connected_partitions
 from src.data_structures.eventually_follows_relation import EventuallyFollowsRelation
 from src.split_detection.helper_functions import overlapping
 from src.data_structures import eventually_follows_relation
@@ -22,6 +24,51 @@ def create_arbitrary_order_partitions(event_log):
     log_overlapping_relations =log.get_overlapping_relations_by_label()
     partitions = []
     activities = log.get_activities_by_label()
+
+    while activities:
+        new_partition = [activities.pop()]
+        partitions.append(new_partition)
+
+    # a b c / b a c / b c a
+
+    # connect partitions if activities are overlapping in log
+    for relation in log_overlapping_relations:
+        connect_partitions(relation.get_first_activity(), relation.get_second_activity(), partitions)
+
+    # connect partitions if activities are not fully eventually connected in log
+    changed = True
+    while changed:
+        changed = False
+        for p1, p2 in combinations(partitions, 2):
+            if not fully_eventually_connected_partitions(p1, p2, log_eventually_follows_relations):
+                connect_partitions(p1[0], p2[0], partitions)
+                changed = True
+                break
+
+    # fully eventually connected in one trace
+    for trace in log.get_traces():
+        trace_eventually_follows_relations = trace.get_eventually_follows_relations_by_label()
+        changed = True
+        while changed:
+            changed = False
+            for p1, p2 in combinations(partitions, 2):
+                if fully_eventually_connected_partitions(p1, p2, trace_eventually_follows_relations):
+                    connect_partitions(p1[0], p2[0], partitions)
+                    changed = True
+                    break
+
+    return partitions
+
+#old code / first solution not working on partitions - new solution above is better to describe (both should be equivalent)
+    #for the old version this needs to be in helper_functions
+
+    def fully_eventually_connected(a1, a2, eventually_follows_relations):
+        if (EventuallyFollowsRelation(a1, a2).relation_exists_by_label(eventually_follows_relations)
+                and EventuallyFollowsRelation(a2, a1).relation_exists_by_label(eventually_follows_relations)):
+            return True
+        return False
+
+    ##
 
     while activities:                                           #WHILE LOOP to create new partitions
         new_partition = [activities.pop()]
@@ -77,3 +124,4 @@ def create_arbitrary_order_partitions(event_log):
 
 
     return partitions
+

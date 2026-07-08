@@ -1,5 +1,6 @@
 from itertools import product
 
+from src.data_structures.activity import Activity
 from src.data_structures.relation import Relation
 from src.data_structures.directly_follows_relation import DirectlyFollowsRelation
 from src.data_structures.overlapping_relation import OverlappingRelation
@@ -50,6 +51,13 @@ class Trace:
     def get_activities(self):
         return self.activities
 
+    def get_activities_by_label(self):
+        activities_by_label = []
+        for activity in self.activities:
+            if not activity.activity_exists_by_label(activities_by_label):
+                activities_by_label.append(Activity(activity.get_label()))
+        return activities_by_label
+
     def get_start_activities(self):
         start_activities = []
         if self.activities:
@@ -82,14 +90,14 @@ class Trace:
         if self.directly_follows_relations:
             for relation in self.directly_follows_relations:
                 if not relation.relation_exists_by_label(dfg_by_label):
-                    dfg_by_label.append(relation)
+                    dfg_by_label.append(Relation(Activity(relation.get_first_activity().get_label()), Activity(relation.get_second_activity().get_label()))) # Relation(Activity(relation.get_first_activity().get_label()), Activity(relation.get_second_activity().get_label()))
         return dfg_by_label
 
     def get_overlapping_relations_by_label(self):
         overlapping_by_label = []
         for relation in self.get_overlapping_relations_by_id():
             if not relation.relation_exists_by_label(overlapping_by_label):
-                overlapping_by_label.append(relation)
+                overlapping_by_label.append(Relation(Activity(relation.get_first_activity().get_label()), Activity(relation.get_second_activity().get_label())))
         return overlapping_by_label
 
     def get_overlapping_relations_by_id(self):
@@ -106,7 +114,7 @@ class Trace:
         eventually_follows_by_label = []
         for relation in self.get_eventually_follows_relations_by_id():
             if not relation.relation_exists_by_label(eventually_follows_by_label):
-                eventually_follows_by_label.append(relation)
+                eventually_follows_by_label.append(Relation(Activity(relation.get_first_activity().get_label()), Activity(relation.get_second_activity().get_label())))
         return eventually_follows_by_label
 
     def get_eventually_follows_relations_by_id(self):

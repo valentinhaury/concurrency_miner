@@ -1,3 +1,4 @@
+from split_detection.detect_arbitrary_order import get_arbitrary_order_sublogs, create_arbitrary_order_partitions
 from src.data_structures.activity import Activity
 from src.data_structures.trace import Trace
 from src.data_structures.log import Log
@@ -23,13 +24,19 @@ from src.log_creation.log_creator import get_log
 
 
 
-str_input = 'exclusive' # exclusive sequence arbitrary interleafing concurrent parallel loop
+str_input = 'interleafing' # exclusive sequence arbitrary interleafing concurrent parallel loop
 test_log = get_log(str_input)
-
 print("-----------------------------------------------------------------------------------------------------------")
-print("Discovered Tree")
-process_tree = concurrency_miner(test_log)
-print(str(process_tree))
+
+print(str(create_arbitrary_order_partitions(test_log)))
+print("-----------------------------------------------------------------------------------------------------------")
+
+
+if False:
+    print("-----------------------------------------------------------------------------------------------------------")
+    print("Discovered Tree")
+    process_tree = concurrency_miner(test_log)
+    print(str(process_tree))
 print("-----------------------------------------------------------------------------------------------------------")
 print("Input Log")
 print(str(test_log))

@@ -1,8 +1,28 @@
+from itertools import product
+
 from src.data_structures.log import Log
 from src.data_structures.trace import Trace
 from src.data_structures.eventually_follows_relation import EventuallyFollowsRelation
 from src.data_structures.overlapping_relation import OverlappingRelation
 from src.data_structures.directly_follows_relation import DirectlyFollowsRelation
+
+def connect_partitions(activity_a, activity_b, partitions):
+    partition_a = []
+    partition_b = []
+    for p1 in partitions:
+        if activity_a.activity_exists_by_label(p1) and not activity_b.activity_exists_by_label(p1):
+            for p2 in partitions:
+                if activity_b.activity_exists_by_label(p2):
+                    partition_a = p1
+                    partition_b = p2
+    if not partition_a == partition_b:
+        partitions.remove(partition_a)
+        partitions.remove(partition_b)
+        new_partition = []
+        new_partition.extend(partition_a)
+        new_partition.extend(partition_b)
+        partitions.append(new_partition)
+    return partitions
 
 def are_in_loop(a1, a2, log):
     start = log.get_start_activities_by_label()
@@ -27,11 +47,17 @@ def direct_connected_id(a1, a2, directly_follows_relations):
         return True
     return False
 
-def fully_eventually_connected(a1, a2, eventually_follows_relations):
-    if (EventuallyFollowsRelation(a1, a2).relation_exists_by_label(eventually_follows_relations)
-        and EventuallyFollowsRelation(a2, a1).relation_exists_by_label(eventually_follows_relations)):
-        return True
-    return False
+
+def fully_eventually_connected_partitions(partition_1, partition_2, eventually_follows_relations):
+    p1_follows_p2 = False
+    p2_follows_p1 = False
+    for a, b in product(partition_1, partition_2):
+        if EventuallyFollowsRelation(a, b).relation_exists_by_label(eventually_follows_relations):
+            p2_follows_p1 = True
+        if EventuallyFollowsRelation(b, a).relation_exists_by_label(eventually_follows_relations):
+            p1_follows_p2 = True
+    return p1_follows_p2 and p2_follows_p1
+
 
 def eventually_connected_in_only_one_direction(a1, a2, eventually_follows_relations):
     right = False
