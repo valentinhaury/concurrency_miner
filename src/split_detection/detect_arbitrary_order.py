@@ -29,8 +29,6 @@ def create_arbitrary_order_partitions(event_log):
         new_partition = [activities.pop()]
         partitions.append(new_partition)
 
-    # a b c / b a c / b c a
-
     # connect partitions if activities are overlapping in log
     for relation in log_overlapping_relations:
         connect_partitions(relation.get_first_activity(), relation.get_second_activity(), partitions)
@@ -45,7 +43,7 @@ def create_arbitrary_order_partitions(event_log):
                 changed = True
                 break
 
-    # fully eventually connected in one trace
+    # connect partitions if they are fully eventually connected in one trace
     for trace in log.get_traces():
         trace_eventually_follows_relations = trace.get_eventually_follows_relations_by_label()
         changed = True
