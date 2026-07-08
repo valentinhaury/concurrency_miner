@@ -5,12 +5,20 @@ from src.data_structures.log import Log
 from src.concurrency_miner import concurrency_miner
 from src.log_creation.log_creator import get_log
 
+#TODO Change partitions creating to work on partitions and not on activities
+# done sequence
+# done arbitrary order
+# TODO interleaving
+# TODO concurrent
+# TODO parallel
+
 #TODO for concurrent/interleafing cut : All partitions that have no start and no end activity should be merged with another partition
 #   The reason is that every partition should be able to start and end the trace if they are concurrent/interleafing
 #   maybe its already implemented in the are_in_loop
 #   look into minimum self distance relationship
 
 #TODO look into tau/silent-activities/optional-activities when there are empty trace
+#   if there is an empty trace in Log1 return x(tau, f(Log1')) where Log1' is Log1 without empty traces
 #   and also look into where empty traces can and should be created
 
 #TODO Fallthroughs, infrequent etc.
