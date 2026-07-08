@@ -1,12 +1,9 @@
 import copy
+from itertools import combinations
 
-from src.data_structures.directly_follows_relation import DirectlyFollowsRelation
-from src.data_structures.eventually_follows_relation import EventuallyFollowsRelation
-from src.data_structures.log import Log
-from src.data_structures.trace import Trace
-from src.data_structures.overlapping_relation import OverlappingRelation
 from src.split_detection.helper_functions import are_in_loop, fully_direct_connected, overlapping, \
-    create_sublogs_concurrent
+    create_sublogs_concurrent, connect_partitions, not_fully_direct_connected_relation, \
+    are_in_loop_partitions  # , minimum_self_distance_relation
 
 
 def detect_interleafing(log):
@@ -22,6 +19,36 @@ def create_interleafing_partitions(event_log):
     overlapping_relations = log.get_overlapping_relations_by_label()
     activities = log.get_activities_by_label()
     partitions = []
+
+    while activities:
+        new_partition = [activities.pop()]
+        partitions.append(new_partition)
+
+    # merge overlapping partitions
+    for relation in overlapping_relations:
+        connect_partitions(relation.get_first_activity(), relation.get_second_activity(), partitions)
+
+    # merge not fully direct connected partitions
+    for relation in not_fully_direct_connected_relation(log.get_activities_by_label(), directly_follows_relations):
+        connect_partitions(relation.get_first_activity(), relation.get_second_activity(), partitions)
+
+    # merge partitions with minimum self distance relationship
+    changed = True
+    while changed:
+        changed = False
+        for p1, p2 in combinations(partitions, 2):
+            if are_in_loop_partitions(p1, p2, log):
+                connect_partitions(p1[0], p2[0], partitions)
+                changed = True
+                break
+
+    return partitions
+    #for relation in minimum_self_distance_relation(log):
+    #    connect_partitions(relation.get_first_activity(), relation.get_second_activity(), partitions)
+
+    # connect partitions with no start or no end activity to an arbitrary partition
+
+
 
     while activities:                                           #WHILE LOOP to create new partitions
         new_partition = [activities.pop()]
