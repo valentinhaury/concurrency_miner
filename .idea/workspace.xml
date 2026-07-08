@@ -3,10 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e3ce310f-a6cb-4654-8df9-4da22971cc3a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data_structures/log.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_structures/log.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data_structures/trace.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_structures/trace.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/split_detection/detect_arbitrary_order.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/split_detection/detect_arbitrary_order.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/split_detection/detect_sequence.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/split_detection/detect_sequence.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/split_detection/helper_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/split_detection/helper_functions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -90,7 +88,7 @@
       <workItem from="1782895176136" duration="3155000" />
       <workItem from="1782983286916" duration="151000" />
       <workItem from="1782985699223" duration="1260000" />
-      <workItem from="1783487603355" duration="6456000" />
+      <workItem from="1783487603355" duration="7788000" />
     </task>
     <servers />
   </component>

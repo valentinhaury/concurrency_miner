@@ -58,15 +58,6 @@ def create_arbitrary_order_partitions(event_log):
     return partitions
 
 #old code / first solution not working on partitions - new solution above is better to describe (both should be equivalent)
-    #for the old version this needs to be in helper_functions
-
-    def fully_eventually_connected(a1, a2, eventually_follows_relations):
-        if (EventuallyFollowsRelation(a1, a2).relation_exists_by_label(eventually_follows_relations)
-                and EventuallyFollowsRelation(a2, a1).relation_exists_by_label(eventually_follows_relations)):
-            return True
-        return False
-
-    ##
 
     while activities:                                           #WHILE LOOP to create new partitions
         new_partition = [activities.pop()]

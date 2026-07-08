@@ -47,7 +47,6 @@ def direct_connected_id(a1, a2, directly_follows_relations):
         return True
     return False
 
-
 def fully_eventually_connected_partitions(partition_1, partition_2, eventually_follows_relations):
     p1_follows_p2 = False
     p2_follows_p1 = False
@@ -58,15 +57,16 @@ def fully_eventually_connected_partitions(partition_1, partition_2, eventually_f
             p1_follows_p2 = True
     return p1_follows_p2 and p2_follows_p1
 
+def eventually_connected_in_only_one_direction_partitions(partition_1, partition_2, eventually_follows_relations):
+    p1_follows_p2 = False
+    p2_follows_p1 = False
+    for a, b in product(partition_1, partition_2):
+        if EventuallyFollowsRelation(a, b).relation_exists_by_label(eventually_follows_relations):
+            p2_follows_p1 = True
+        if EventuallyFollowsRelation(b, a).relation_exists_by_label(eventually_follows_relations):
+            p1_follows_p2 = True
+    return p1_follows_p2 != p2_follows_p1
 
-def eventually_connected_in_only_one_direction(a1, a2, eventually_follows_relations):
-    right = False
-    left = False
-    if EventuallyFollowsRelation(a1, a2).relation_exists_by_label(eventually_follows_relations):
-        right = True
-    if EventuallyFollowsRelation(a2, a1).relation_exists_by_label(eventually_follows_relations):
-        left = True
-    return right != left
 
 def eventually_connected(a1, a2, eventually_follows_relations):
     if (EventuallyFollowsRelation(a1, a2).relation_exists_by_label(eventually_follows_relations)
@@ -78,6 +78,14 @@ def overlapping(a1, a2, overlapping_relations):
     if (OverlappingRelation(a1, a2).relation_exists_by_label(overlapping_relations)
         or OverlappingRelation(a2, a1).relation_exists_by_label(overlapping_relations)):
         return True
+    return False
+
+def overlapping_partitions(partition_1, partition_2, overlapping_relations):
+    for a, b in product(partition_1, partition_2):
+        if OverlappingRelation(a, b).relation_exists_by_label(overlapping_relations):
+            return True
+        if OverlappingRelation(b, a).relation_exists_by_label(overlapping_relations):
+            return True
     return False
 
 def create_sublogs_sequential(log, partitions):
@@ -122,3 +130,21 @@ def create_sublogs_concurrent(log, partitions):
         sublogs.append(Log(sub_log))
 
     return sublogs
+
+# needed for old code
+
+    def eventually_connected_in_only_one_direction(a1, a2, eventually_follows_relations):
+        right = False
+        left = False
+        if EventuallyFollowsRelation(a1, a2).relation_exists_by_label(eventually_follows_relations):
+            right = True
+        if EventuallyFollowsRelation(a2, a1).relation_exists_by_label(eventually_follows_relations):
+            left = True
+        return right != left
+
+    def fully_eventually_connected(a1, a2, eventually_follows_relations):
+        if (EventuallyFollowsRelation(a1, a2).relation_exists_by_label(eventually_follows_relations)
+                and EventuallyFollowsRelation(a2, a1).relation_exists_by_label(eventually_follows_relations)):
+            return True
+        return False
+

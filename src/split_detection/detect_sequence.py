@@ -1,12 +1,10 @@
 import copy
+from itertools import combinations
 
 from src.data_structures.eventually_follows_relation import EventuallyFollowsRelation
-from src.data_structures.activity import Activity
-from src.data_structures.log import Log
-from src.data_structures.relation import Relation
-from src.data_structures.trace import Trace
 from src.split_detection.helper_functions import eventually_connected_in_only_one_direction, overlapping, \
-    create_sublogs_sequential
+    create_sublogs_sequential, connect_partitions, overlapping_partitions, \
+    eventually_connected_in_only_one_direction_partitions
 
 
 def detect_sequence(log):
@@ -48,6 +46,34 @@ def create_sequence_partitions(event_log):
     activities = log.get_activities_by_label()
 
     partitions = []
+
+    while activities:
+        new_partition = [activities.pop()]
+        partitions.append(new_partition)
+
+    # connect partitions with overlapping activities
+    changed = True
+    while changed:
+        changed = False
+        for p1, p2 in combinations(partitions, 2):
+            if overlapping_partitions(p1, p2, overlapping_relations):
+                connect_partitions(p1[0], p2[0], partitions)
+                changed = True
+                break
+
+    # connect partitions that are eventually connected in both directions
+    changed = True
+    while changed:
+        changed = False
+        for p1, p2 in combinations(partitions, 2):
+            if not eventually_connected_in_only_one_direction_partitions(p1, p2, eventually_follows_relations):
+                connect_partitions(p1[0], p2[0], partitions)
+                changed = True
+                break
+
+    return partitions
+
+# old code working on activities instead of partitions
     while activities:
         new_partition = [activities.pop()]
         changed = True
