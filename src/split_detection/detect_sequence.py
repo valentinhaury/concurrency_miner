@@ -2,10 +2,9 @@ import copy
 from itertools import combinations
 
 from src.data_structures.eventually_follows_relation import EventuallyFollowsRelation
-from src.split_detection.helper_functions import eventually_connected_in_only_one_direction, overlapping, \
+from src.split_detection.helper_functions import overlapping, \
     create_sublogs_sequential, connect_partitions, overlapping_partitions, \
     eventually_connected_in_only_one_direction_partitions
-
 
 def detect_sequence(log):
     return len(create_sequence_partitions(log)) > 1

@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e3ce310f-a6cb-4654-8df9-4da22971cc3a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/split_detection/detect_arbitrary_order.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/split_detection/detect_arbitrary_order.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/split_detection/detect_sequence.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/split_detection/detect_sequence.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,7 +87,7 @@
       <workItem from="1782895176136" duration="3155000" />
       <workItem from="1782983286916" duration="151000" />
       <workItem from="1782985699223" duration="1260000" />
-      <workItem from="1783487603355" duration="8035000" />
+      <workItem from="1783487603355" duration="8748000" />
     </task>
     <servers />
   </component>
