@@ -65,6 +65,7 @@ def create_loop_partitions(event_log):
     eventually_follows_relations = log.get_eventually_follows_relations_by_label()
     directly_follows_relations = log.get_directly_follows_relations_by_label()
 
+# replace code below that works on activities with code working on partitions
     partitions = []
     partition_1 = []
 #create partition 1 where all start and end activities are

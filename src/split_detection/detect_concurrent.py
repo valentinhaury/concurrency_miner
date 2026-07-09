@@ -17,6 +17,19 @@ def create_concurrent_partitions(event_log):
     activities = log.get_activities_by_label()
     partitions = []
 
+    # connect partitions if activities are never overlapping
+
+    # connect partitions if activities are not fully connected
+
+    # connect partitions if activities are in minimum self distance relationship
+
+    # connect partition to arbitrary if it has no start or no end activity
+
+
+
+
+    # old code not in use anymore
+
     while activities:  # WHILE LOOP to create new partitions
         new_partition = [activities.pop()]
         changed = True

@@ -50,15 +50,6 @@ def add_partitions_with_no_start_or_end_to_arbitrary(partitions, start_activitie
             i += 1
     return partitions
 
-def are_in_loop(a1, a2, log):
-    start = log.get_start_activities_by_label()
-    end = log.get_end_activities_by_label()
-    if not a1.activity_exists_by_label(start) and not a1.activity_exists_by_label(end):
-        return True
-    if not a2.activity_exists_by_label(start) and not a2.activity_exists_by_label(end):
-        return True
-    return False
-
 def fully_direct_connected(a1, a2, directly_follows_relations):
     if (DirectlyFollowsRelation(a1, a2).relation_exists_by_label(directly_follows_relations)
      and DirectlyFollowsRelation(a2, a1).relation_exists_by_label(directly_follows_relations)
@@ -167,6 +158,8 @@ def create_sublogs_concurrent(log, partitions):
     return sublogs
 
 # needed for old code
+
+
     def are_in_loop_partitions(partition_1, partition_2, log):
         start_activities = log.get_start_activities_by_label()
         end_activities = log.get_end_activities_by_label()
@@ -210,6 +203,15 @@ def create_sublogs_concurrent(log, partitions):
     def fully_eventually_connected(a1, a2, eventually_follows_relations):
         if (EventuallyFollowsRelation(a1, a2).relation_exists_by_label(eventually_follows_relations)
                 and EventuallyFollowsRelation(a2, a1).relation_exists_by_label(eventually_follows_relations)):
+            return True
+        return False
+
+    def are_in_loop(a1, a2, log):
+        start = log.get_start_activities_by_label()
+        end = log.get_end_activities_by_label()
+        if not a1.activity_exists_by_label(start) and not a1.activity_exists_by_label(end):
+            return True
+        if not a2.activity_exists_by_label(start) and not a2.activity_exists_by_label(end):
             return True
         return False
 
