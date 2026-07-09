@@ -37,8 +37,28 @@ def create_interleafing_partitions(event_log):
     for relation in get_minimum_self_distance_relations(log):
         connect_partitions(relation.get_first_activity(), relation.get_second_activity(), partitions)
 
-
     # connect partitions with no start or no end activity to an arbitrary partition
+    changed = True
+    while changed:
+        changed = False
+        if len(partitions) <= 1:
+            continue
+        i = 0
+        for partition in partitions:
+            has_start = False
+            has_end = False
+            for activity in partition:
+                if activity.activity_exists_by_label(log.get_start_activities_by_label()):
+                    has_start = True
+                if activity.activity_exists_by_label(log.get_end_activities_by_label()):
+                    has_end = True
+            if not has_start and not has_end:
+                if i == 0:
+                    connect_partitions(partitions[0][0], partitions[1][0], partitions)
+                if i > 0:
+                    connect_partitions(partitions[i][0], partitions[0][0], partitions)
+                changed = True
+            i += 1
 
     return partitions
 
