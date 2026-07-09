@@ -1,6 +1,43 @@
 from collections import deque
 import copy
 
+from src.data_structures.activity import Activity
+from src.data_structures.relation import Relation
+
+
+def get_minimum_self_distance_relations(log):
+    relationship_dict = {}
+
+    for activity in log.get_activities_by_label():
+        relationship_dict[activity.get_label()] = {
+            "distance": None,
+            "between": None
+        }
+
+    for trace in log.get_traces():
+        trace_dict = trace_self_distance_list(trace)
+        for act, (distance, relation) in trace_dict.items():
+            old_distance = relationship_dict[act.get_label()]["distance"]
+            if distance and not old_distance:
+                relationship_dict[act.get_label()]["distance"] = distance
+                relationship_dict[act.get_label()]["between"] = relation
+            elif distance and distance < old_distance:
+                relationship_dict[act.get_label()]["distance"] = distance
+                relationship_dict[act.get_label()]["between"] = relation
+            elif distance and distance == old_distance:
+                relationship_dict[act.get_label()]["between"].extend(relation)
+
+    msd_relation = []
+    for activity, items in relationship_dict.items():
+        if items["distance"]:
+            for target in items["between"]:
+                msd_relation.append(Relation(Activity(activity), target))
+
+    return msd_relation
+
+
+
+
 
 
 # CODE FROM CHATGPT 08.07.2026
@@ -13,14 +50,14 @@ def trace_self_distance_list(trace):
 
     # Adjazenzliste
     graph = {a: [] for a in activities}
-    for src, dst in edges:
-        graph[src].append(dst)
+    for edge in edges:
+        graph[edge.get_first_activity()].append(edge.get_second_activity())
 
     result = {}
 
     for start in activities:
 
-        start_label = activities[start].get_label()
+        start_label = start.get_label()
 
         queue = deque([start])
 
@@ -60,7 +97,7 @@ def trace_self_distance_list(trace):
                 # gleiches Label gefunden
                 if (
                     nxt != start
-                    and activities[nxt].get_label() == start_label
+                    and nxt.get_label() == start_label
                 ):
                     if best_distance is None:
                         best_distance = new_dist

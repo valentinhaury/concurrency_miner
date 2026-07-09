@@ -51,35 +51,6 @@ def not_fully_direct_connected_relation(activities, directly_follows_relations):
            relations.append(Relation(a1, a2))
     return relations
 
-def are_in_loop_partitions(partition_1, partition_2, log):
-    start_activities = log.get_start_activities_by_label()
-    end_activities = log.get_end_activities_by_label()
-    partition_1_inner = True
-    partition_2_inner = True
-    for activity in partition_1:
-        if activity.activity_exists_by_label(start_activities) or activity.activity_exists_by_label(end_activities):
-            partition_1_inner = False
-    for activity in partition_2:
-        if activity.activity_exists_by_label(start_activities) or activity.activity_exists_by_label(end_activities):
-            partition_2_inner = False
-    if partition_1_inner == partition_2_inner:
-        return False
-    if partition_1_inner:
-        inner_partition = partition_1
-        outer_partition = partition_2
-    else:
-        inner_partition = partition_2
-        outer_partition = partition_1
-
-    for trace in log.get_traces():
-        for a1, a2 in product(outer_partition, inner_partition):
-            if a1.activity_exists_by_label and a2.activity_exists_by_label(trace.get_activities_by_label()):
-                if not EventuallyFollowsRelation(a1, a2).relation_exists_by_label(trace.get_eventually_follows_relations_by_label()):
-                    return False
-                if not EventuallyFollowsRelation(a2, a1).relation_exists_by_label(trace.get_eventually_follows_relations_by_label()):
-                    return False
-    return True
-
 def direct_connected_id(a1, a2, directly_follows_relations):
     if (DirectlyFollowsRelation(a1, a2).relation_exists_by_id(directly_follows_relations)
      or DirectlyFollowsRelation(a2, a1).relation_exists_by_id(directly_follows_relations)
@@ -172,6 +143,36 @@ def create_sublogs_concurrent(log, partitions):
     return sublogs
 
 # needed for old code
+    def are_in_loop_partitions(partition_1, partition_2, log):
+        start_activities = log.get_start_activities_by_label()
+        end_activities = log.get_end_activities_by_label()
+        partition_1_inner = True
+        partition_2_inner = True
+        for activity in partition_1:
+            if activity.activity_exists_by_label(start_activities) or activity.activity_exists_by_label(end_activities):
+                partition_1_inner = False
+        for activity in partition_2:
+            if activity.activity_exists_by_label(start_activities) or activity.activity_exists_by_label(end_activities):
+                partition_2_inner = False
+        if partition_1_inner == partition_2_inner:
+            return False
+        if partition_1_inner:
+            inner_partition = partition_1
+            outer_partition = partition_2
+        else:
+            inner_partition = partition_2
+            outer_partition = partition_1
+
+        for trace in log.get_traces():
+            for a1, a2 in product(outer_partition, inner_partition):
+                if a1.activity_exists_by_label and a2.activity_exists_by_label(trace.get_activities_by_label()):
+                    if not EventuallyFollowsRelation(a1, a2).relation_exists_by_label(
+                            trace.get_eventually_follows_relations_by_label()):
+                        return False
+                    if not EventuallyFollowsRelation(a2, a1).relation_exists_by_label(
+                            trace.get_eventually_follows_relations_by_label()):
+                        return False
+        return True
 
     def eventually_connected_in_only_one_direction(a1, a2, eventually_follows_relations):
         right = False
