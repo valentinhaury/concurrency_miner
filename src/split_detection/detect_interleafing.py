@@ -3,7 +3,8 @@ from itertools import combinations
 
 from src.split_detection.minimum_self_distance_relation import get_minimum_self_distance_relations
 from src.split_detection.helper_functions import are_in_loop, fully_direct_connected, overlapping, \
-    create_sublogs_concurrent, connect_partitions, not_fully_direct_connected_relation
+    create_sublogs_concurrent, connect_partitions, not_fully_direct_connected_relation, \
+    add_partitions_with_no_start_or_end_to_arbitrary
 
 
 def detect_interleafing(log):
@@ -38,27 +39,9 @@ def create_interleafing_partitions(event_log):
         connect_partitions(relation.get_first_activity(), relation.get_second_activity(), partitions)
 
     # connect partitions with no start or no end activity to an arbitrary partition
-    changed = True
-    while changed:
-        changed = False
-        if len(partitions) <= 1:
-            continue
-        i = 0
-        for partition in partitions:
-            has_start = False
-            has_end = False
-            for activity in partition:
-                if activity.activity_exists_by_label(log.get_start_activities_by_label()):
-                    has_start = True
-                if activity.activity_exists_by_label(log.get_end_activities_by_label()):
-                    has_end = True
-            if not has_start and not has_end:
-                if i == 0:
-                    connect_partitions(partitions[0][0], partitions[1][0], partitions)
-                if i > 0:
-                    connect_partitions(partitions[i][0], partitions[0][0], partitions)
-                changed = True
-            i += 1
+    start_activities = log.get_start_activities_by_label()
+    end_activities = log.get_end_activities_by_label()
+    partitions = add_partitions_with_no_start_or_end_to_arbitrary(partitions, start_activities, end_activities)
 
     return partitions
 
