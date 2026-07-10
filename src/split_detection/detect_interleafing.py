@@ -20,6 +20,7 @@ def create_interleafing_partitions(event_log):
     activities = log.get_activities_by_label()
     partitions = []
 
+    #initialize partitions
     while activities:
         new_partition = [activities.pop()]
         partitions.append(new_partition)

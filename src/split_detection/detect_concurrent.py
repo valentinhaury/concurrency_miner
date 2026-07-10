@@ -1,6 +1,10 @@
 import copy
+from itertools import combinations
 
-from src.split_detection.helper_functions import fully_direct_connected, overlapping, create_sublogs_concurrent
+from src.split_detection.minimum_self_distance_relation import get_minimum_self_distance_relations
+from src.split_detection.helper_functions import fully_direct_connected, overlapping, create_sublogs_concurrent, \
+    connect_partitions, fully_overlapping_partitions, not_fully_direct_connected_relation, \
+    add_partitions_with_no_start_or_end_to_arbitrary
 
 
 def detect_concurrent(log):
@@ -17,14 +21,35 @@ def create_concurrent_partitions(event_log):
     activities = log.get_activities_by_label()
     partitions = []
 
-    # connect partitions if activities are never overlapping
+    #initialize partitions
+    while activities:
+        new_partition = [activities.pop()]
+        partitions.append(new_partition)
+
+    # connect partitions if 2 activities are never overlapping
+    changed = True
+    while changed:
+        changed = False
+        for p1, p2 in combinations(partitions, 2):
+            if not fully_overlapping_partitions(p1, p2, overlapping_relations):
+                connect_partitions(p1[0], p2[0], partitions)
+                changed = True
+                break
 
     # connect partitions if activities are not fully connected
+    for relation in not_fully_direct_connected_relation(log.get_activities_by_label(), directly_follows_relations):
+        connect_partitions(relation.get_first_activity(), relation.get_second_activity(), partitions)
 
     # connect partitions if activities are in minimum self distance relationship
+    for relation in get_minimum_self_distance_relations(log):
+        connect_partitions(relation.get_first_activity(), relation.get_second_activity(), partitions)
 
     # connect partition to arbitrary if it has no start or no end activity
+    start_activities = log.get_start_activities_by_label()
+    end_activities = log.get_end_activities_by_label()
+    partitions = add_partitions_with_no_start_or_end_to_arbitrary(partitions, start_activities, end_activities)
 
+    return partitions
 
 
 

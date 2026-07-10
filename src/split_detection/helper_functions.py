@@ -108,11 +108,17 @@ def overlapping(a1, a2, overlapping_relations):
 
 def overlapping_partitions(partition_1, partition_2, overlapping_relations):
     for a, b in product(partition_1, partition_2):
-        if OverlappingRelation(a, b).relation_exists_by_label(overlapping_relations):
-            return True
-        if OverlappingRelation(b, a).relation_exists_by_label(overlapping_relations):
+        if OverlappingRelation(a, b).relation_exists_by_label(overlapping_relations) \
+                or OverlappingRelation(b, a).relation_exists_by_label(overlapping_relations):
             return True
     return False
+
+def fully_overlapping_partitions(partition_1, partition_2, overlapping_relations):
+    for a, b in product(partition_1, partition_2):
+        if not (OverlappingRelation(a, b).relation_exists_by_label(overlapping_relations)
+                or OverlappingRelation(b, a).relation_exists_by_label(overlapping_relations)):
+            return False
+    return True
 
 def create_sublogs_sequential(log, partitions):
     sublogs = []
