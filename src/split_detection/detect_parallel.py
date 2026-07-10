@@ -1,7 +1,10 @@
 import copy
+from idlelib.configdialog import changes
+from itertools import combinations, product
 
+from src.data_structures.overlapping_relation import OverlappingRelation
 from src.data_structures.trace import Trace
-from src.split_detection.helper_functions import overlapping, create_sublogs_concurrent
+from src.split_detection.helper_functions import overlapping, create_sublogs_concurrent, connect_partitions
 
 
 def detect_parallel(log):
@@ -17,6 +20,31 @@ def create_parallel_partitions(event_log):
     traces = log.get_traces()
     partitions = []
 
+    # initialize partitions
+    while activities:
+        new_partition = [activities.pop()]
+        partitions.append(new_partition)
+
+    # add all partitions if not every activity is overlapping every activity
+    changed = True
+    while changed:
+        changed = False
+        for p1, p2 in combinations(partitions, 2):
+            for a, b in product(p1, p2):
+                for trace in traces:
+                    if not (OverlappingRelation(a, b).relation_exists_by_label(trace.get_overlapping_relations_by_label())
+                        or OverlappingRelation(b, a).relation_exists_by_label(trace.get_overlapping_relations_by_label())):
+                        changed = True
+                        break
+                if changed: break
+            if changed:
+                connect_partitions(p1[0], p2[0], partitions)
+                break
+
+
+    return partitions
+
+    # old code not used anymore
     while activities:  # WHILE LOOP to create new partitions
         new_partition = [activities.pop()]
         changed = True

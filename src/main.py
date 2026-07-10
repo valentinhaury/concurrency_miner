@@ -10,12 +10,9 @@ from src.log_creation.log_creator import get_log
 # done sequence
 # done arbitrary order
 # done interleaving
-# TODO concurrent
+# done concurrent
 # TODO parallel
 # TODO loop
-
-#TODO for concurrent cut : All partitions that have no start and no end activity should be merged with another partition
-#   The reason is that every partition should be able to start and end the trace if they are concurrent/interleafing
 
 #TODO look into tau/silent-activities/optional-activities when there are empty trace
 #   if there is an empty trace in Log1 return x(tau, f(Log1')) where Log1' is Log1 without empty traces
@@ -24,13 +21,6 @@ from src.log_creation.log_creator import get_log
 #TODO Fallthroughs, infrequent etc.
 
 #TODO Tree to traces - parser -> Given a tree returns a Log with all possible Traces -> Good to create Testcases
-
-
-
-
-
-
-
 
 str_input = 'loop' # exclusive sequence arbitrary interleafing concurrent parallel loop
 test_log = get_log(str_input)
