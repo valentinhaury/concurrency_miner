@@ -71,27 +71,3 @@ def create_sequence_partitions(event_log):
                 break
 
     return partitions
-
-# old code working on activities instead of partitions
-    while activities:
-        new_partition = [activities.pop()]
-        changed = True
-        while changed:
-            changed = False
-            saved_activities = []
-            for a1 in activities:
-                in_partition = False
-                for a2 in new_partition:
-                    if (overlapping(a1, a2, overlapping_relations)
-                            or not eventually_connected_in_only_one_direction(a1, a2, eventually_follows_relations)):
-                        in_partition = True
-                if in_partition:
-                    if not a1.activity_exists_by_label(new_partition):
-                        new_partition.append(a1)
-                        changed = True
-                else:
-                    saved_activities.append(a1)
-            activities = saved_activities
-        partitions.append(new_partition)
-
-    return partitions
