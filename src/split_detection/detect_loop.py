@@ -1,11 +1,13 @@
 import copy
+from itertools import product, combinations
 
 from src.data_structures.relation import Relation
 from src.data_structures.log import Log
 from src.data_structures.trace import Trace
 from src.data_structures import directly_follows_relation
 from src.data_structures.directly_follows_relation import DirectlyFollowsRelation
-from src.split_detection.helper_functions import eventually_connected, direct_connected_id, overlapping
+from src.split_detection.helper_functions import eventually_connected, direct_connected_id, overlapping, \
+    connect_partitions
 
 
 def detect_loop(log):
@@ -65,7 +67,6 @@ def create_loop_partitions(event_log):
     eventually_follows_relations = log.get_eventually_follows_relations_by_label()
     directly_follows_relations = log.get_directly_follows_relations_by_label()
 
-# replace code below that works on activities with code working on partitions
     partitions = []
     partition_1 = []
 #create partition 1 where all start and end activities are
@@ -77,6 +78,89 @@ def create_loop_partitions(event_log):
             saved_activities.append(activity)
     activities = saved_activities
 
+# create all other partitions from the non-start and non-end activities
+    while activities:
+        new_partition = [activities.pop()]
+        partitions.append(new_partition)
+
+# merge partitions 2-n if they are connected
+    changed = True
+    while changed:
+        changed = False
+        for p1, p2 in combinations(partitions, 2):
+            for a, b in product(p1, p2):
+                if DirectlyFollowsRelation(a, b).relation_exists_by_label(directly_follows_relations) \
+                    or DirectlyFollowsRelation(b, a).relation_exists_by_label(directly_follows_relations):
+                    changed = True
+                    break
+            if changed:
+                connect_partitions(p1[0], p2[0], partitions)
+                break
+
+# merge partitions to p1 if they can be directly reached from a start-activity that is no end-activity
+#   or if an end-activity that is no start-activity can be directly reached from there
+    start_and_not_end_activities = []
+    end_and_not_start_activities = []
+    for activity in start_activities:
+        if not activity.activity_exists_by_label(end_activities):
+            start_and_not_end_activities.append(activity)
+    for activity in end_activities:
+        if not activity.activity_exists_by_label(start_activities):
+            end_and_not_start_activities.append(activity)
+
+    saved_partitions = []
+    while partitions:
+        partition = partitions.pop()
+        merge = False
+        for activity in partition:
+            for start_activity in start_and_not_end_activities:
+                if DirectlyFollowsRelation(start_activity, activity).relation_exists_by_label(directly_follows_relations):
+                    merge = True
+                    break
+            if merge: break
+            for end_activity in end_and_not_start_activities:
+                if DirectlyFollowsRelation(activity, end_activity).relation_exists_by_label(directly_follows_relations):
+                    merge = True
+                    break
+            if merge: break
+        if merge:
+            partition_1.extend(partition)
+        else:
+            saved_partitions.append(partition)
+    partitions = saved_partitions
+
+# merge partitions to p1 if from a partition one but not all start-activities can be reached
+#   or if a partition can be reached from one but not all end-activities
+    saved_partitions = []
+    while partitions:
+        partition = partitions.pop()
+        reaches_start_count = 0
+        reached_by_end_count = 0
+        for start in start_activities:
+            for activity in partition:
+                if DirectlyFollowsRelation(activity, start).relation_exists_by_label(directly_follows_relations):
+                    reaches_start_count += 1
+                    break
+        for end in end_activities:
+            for activity in partition:
+                if DirectlyFollowsRelation(end, activity).relation_exists_by_label(directly_follows_relations):
+                    reached_by_end_count += 1
+                    break
+        if 0 < reaches_start_count < len(start_activities):
+            partition_1.extend(partition)
+        elif 0 < reached_by_end_count < len(end_activities):
+            partition_1.extend(partition)
+        else:
+            saved_partitions.append(partition)#
+    partitions = saved_partitions
+
+    partitions.insert(0, partition_1)
+    return partitions
+
+
+
+
+#old code
 #merge activities to p1 if they can be directly reached from a start-activity that is no end-activity
 #   or if and end-activity that is no start-activity can be directly reached from there
     saved_activities = []

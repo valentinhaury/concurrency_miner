@@ -11,8 +11,8 @@ from src.log_creation.log_creator import get_log
 # done arbitrary order
 # done interleaving
 # done concurrent
-# TODO parallel
-# TODO loop
+# done parallel
+# done loop
 
 #TODO look into tau/silent-activities/optional-activities when there are empty trace
 #   if there is an empty trace in Log1 return x(tau, f(Log1')) where Log1' is Log1 without empty traces
