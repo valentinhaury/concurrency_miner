@@ -10,6 +10,8 @@ from src.log_creation.log_creator import get_log
 
 #TODO Fallthroughs, infrequent etc.
 
+
+#TODO Add good test cases (bigger constructs with all operators mixed)
 #TODO Tree to traces - parser -> Given a tree returns a Log with all possible Traces -> Good to create Testcases
 
 str_input = 'sequence_loop' # exclusive sequence arbitrary interleafing concurrent parallel loop sequence_loop
