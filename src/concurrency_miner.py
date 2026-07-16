@@ -1,3 +1,4 @@
+from src.algorithm_components.helper_functions.sublog_functions import get_log_without_activity
 from src.algorithm_components.fall_throughs.activitiy_once_per_trace import detect_activity_once_per_trace, \
     get_activities_once_per_trace
 from src.algorithm_components.base_cases.handle_empty_traces import handle_empty_traces
@@ -86,7 +87,7 @@ def concurrency_miner(log, multi_instance_activities=None):
         process_tree = Node(Operator.Concurrent)
         activity = get_activities_once_per_trace(log)[0]
         process_tree.add_child(activity)
-        log = get_log_without_acitivitiy(log, activity)
+        log = get_log_without_activity(log, activity)
         process_tree.add_child(concurrency_miner(log, multi_instance_activities))
         return process_tree
 #activity concurrent
