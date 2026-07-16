@@ -1,7 +1,9 @@
 from src.data_structures.activity import Activity
 
 class Log:
-    def __init__(self, traces):
+    def __init__(self, traces=None):
+        if traces is None:
+            traces = []
         self.traces = traces
 
     def __str__(self):

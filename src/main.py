@@ -8,10 +8,21 @@ from src.data_structures.log import Log
 from src.concurrency_miner import concurrency_miner
 from src.log_creation.log_creator import get_log
 
-#TODO Fallthroughs, infrequent etc.
+#TODO Fallthroughs,
+# done  Empty Log -> Tau
+# done  Empty Trace -> x(Tau,...)
+#       activity once per trace -> if an acitivity is in every trace put it in concurrent and continue
+#       concurrent activity -> put one activity in concurrent and see if a cut is found with the rest, if yes continue
+#       strict tau loop ?
+#       tau loop ?
+#       flower model -> return all activities concurrent
 
+#TODO data handling
+#       infrequent
+#       incompletness
 
 #TODO Add good test cases (bigger constructs with all operators mixed)
+#TODO correct and incorrect test cases
 #TODO Tree to traces - parser -> Given a tree returns a Log with all possible Traces -> Good to create Testcases
 
 str_input = 'sequence_loop' # exclusive sequence arbitrary interleafing concurrent parallel loop sequence_loop

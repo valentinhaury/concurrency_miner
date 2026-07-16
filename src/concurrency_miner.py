@@ -14,9 +14,14 @@ from src.split_detection.detect_multi_instance import get_multi_instance_activit
 
 
 def concurrency_miner(log, multi_instance_activities=None):
+    if not log.get_traces():
+        return Node(Activity("tau"))
+
 # check for multi_instance activities
     if not multi_instance_activities:
         multi_instance_activities = get_multi_instance_activities(log)
+
+##### BASE CASES
 # add Activity("tau") to empty traces
     handle_empty_traces(log)
 # end recursion and add single activity node
@@ -28,6 +33,8 @@ def concurrency_miner(log, multi_instance_activities=None):
         else:
             process_tree = Node(activity)
         return process_tree
+
+##### OPERATORS Exclusive, Sequence, Arbitrary Order, Interleaving, Concurrent, Parallel, Loop
 # split the log with an exclusive choice operator
     elif detect_exclusive(log):
         process_tree = Node(Operator.Exclusive)
@@ -70,5 +77,7 @@ def concurrency_miner(log, multi_instance_activities=None):
         for sublog in get_loop_sublogs(log):
             process_tree.add_child(concurrency_miner(sublog, multi_instance_activities))
         return process_tree
+
+##### FALL THROUGH
     else:
         return Node("Fall-Through")
