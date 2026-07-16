@@ -1,4 +1,6 @@
 import copy
+from itertools import product, combinations
+
 from src.data_structures.log import Log
 
 
@@ -21,25 +23,28 @@ def create_exclusive_choice_partitions(event_log):
         return [[traces.pop()]]
 
     trace_partitions = []
-
     while traces:
-        trace_partition = [traces.pop()]
-        saved_traces = []
-        while traces:
-            t2 = traces.pop()
-            disjunct = True
-            for t1 in trace_partition:
-                if not t1.has_disjunct_activities_to(t2):
-                    disjunct = False
-            if not disjunct:
-                trace_partition.append(t2)
-            else:
-                saved_traces.append(t2)
-        traces = saved_traces
-        trace_partitions.append(trace_partition)
-
+        trace = traces.pop()
+        trace_partitions.append([trace])
+    changed = True
+    while changed:
+        changed = False
+        for p1, p2 in combinations(trace_partitions, 2):
+            if changed:
+                break
+            for t1, t2 in product(p1, p2):
+                if not are_disjunct(t1, t2):
+                    changed = True
+                    p1.extend(p2)
+                    trace_partitions.remove(p2)
+                    break
     return trace_partitions
 
+def are_disjunct(t1, t2):
+        for a1, a2 in product(t1.get_activities_by_label(), t2.get_activities_by_label()):
+            if a1.get_label() == a2.get_label():
+                return False
+        return True
 
 
 

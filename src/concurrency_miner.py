@@ -1,3 +1,4 @@
+from algorithm_components.fall_throughs.flower_model import get_loop_activities
 from src.algorithm_components.helper_functions.sublog_functions import get_log_without_activity
 from src.algorithm_components.fall_throughs.activitiy_once_per_trace import detect_activity_once_per_trace, \
     get_activities_once_per_trace
@@ -82,13 +83,14 @@ def concurrency_miner(log, multi_instance_activities=None):
         return process_tree
 
 ##### FALL THROUGH
+
 # acitivity once per trace
     elif detect_activity_once_per_trace(log):
         process_tree = Node(Operator.Concurrent)
         activity = get_activities_once_per_trace(log)[0]
         process_tree.add_child(activity)
-        log = get_log_without_activity(log, activity)
-        process_tree.add_child(concurrency_miner(log, multi_instance_activities))
+        new_log = get_log_without_activity(log, activity)
+        process_tree.add_child(concurrency_miner(new_log, multi_instance_activities))
         return process_tree
 #activity concurrent
     #missing
@@ -96,4 +98,24 @@ def concurrency_miner(log, multi_instance_activities=None):
     #missing
 # flower model → aktivitäten die in einem trace mehrfach vorkommen in einen tau-loop stecken
     else:
-        return Node("Fall-Through")
+        loop_activities = get_loop_activities(log)
+        activities = get_activities_once_per_trace(log)
+        optional_activities = []
+        for activity in log.get_activities_by_label():
+            if not (activity.activity_exists_by_label(loop_activities)
+                    or activity.activity_exists_by_label(activities)):
+                optional_activities.append(activity)
+        process_tree = Node(Operator.Concurrent)
+        for activity in activities:
+            process_tree.add_child(Node(activity))
+        for activity in loop_activities:
+            child = Node(Operator.Loop)
+            child.add_child(Node(Activity("tau")))
+            child.add_child(Node(activity))
+            process_tree.add_child(child)
+        for activity in optional_activities:
+            child = Node(Operator.Exclusive)
+            child.add_child(Node(Activity("tau")))
+            child.add_child(Node(activity))
+            process_tree.add_child(child)
+        return process_tree

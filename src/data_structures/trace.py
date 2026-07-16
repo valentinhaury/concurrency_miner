@@ -42,12 +42,6 @@ class Trace:
             return False
         return True
 
-    def has_disjunct_activities_to(self, other):
-        duplicate = [a for a in self.activities if a.activity_exists_by_label(other.get_activities())]
-        if duplicate:
-            return False
-        return True
-
     def get_activities(self):
         return self.activities
 
