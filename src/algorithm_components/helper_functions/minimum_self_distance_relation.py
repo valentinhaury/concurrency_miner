@@ -1,6 +1,5 @@
 from collections import deque
 import copy
-
 from src.data_structures.activity import Activity
 from src.data_structures.relation import Relation
 

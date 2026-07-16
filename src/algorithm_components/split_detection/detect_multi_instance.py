@@ -1,5 +1,4 @@
 import copy
-
 from src.data_structures.overlapping_relation import OverlappingRelation
 
 

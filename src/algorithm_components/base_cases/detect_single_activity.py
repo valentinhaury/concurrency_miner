@@ -1,11 +1,6 @@
 import copy
-
 from src.data_structures.activity import Activity
 from src.data_structures.eventually_follows_relation import EventuallyFollowsRelation
-from src.data_structures.trace import Trace
-from src.data_structures.overlapping_relation import OverlappingRelation
-from src.data_structures.trace import Trace
-
 
 def detect_single_activity(event_log):
     log = copy.deepcopy(event_log)

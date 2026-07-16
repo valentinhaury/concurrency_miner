@@ -1,10 +1,8 @@
 import copy
 from itertools import combinations
-
-from src.split_detection.helper_functions import create_sublogs_sequential, \
+from src.algorithm_components.helper_functions.helper_functions import create_sublogs_sequential, \
     connect_partitions, fully_eventually_connected_partitions
-from src.data_structures.eventually_follows_relation import EventuallyFollowsRelation
-from src.split_detection.helper_functions import overlapping
+
 
 def detect_arbitrary_order(log):
     return len(create_arbitrary_order_partitions(log)) > 1

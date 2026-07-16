@@ -1,12 +1,9 @@
 import copy
 from itertools import product, combinations
-
-from src.data_structures.relation import Relation
 from src.data_structures.log import Log
 from src.data_structures.trace import Trace
-from src.data_structures import directly_follows_relation
 from src.data_structures.directly_follows_relation import DirectlyFollowsRelation
-from src.split_detection.helper_functions import eventually_connected, direct_connected_id, overlapping, \
+from src.algorithm_components.helper_functions.helper_functions import direct_connected_id, overlapping, \
     connect_partitions
 
 

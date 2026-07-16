@@ -1,5 +1,5 @@
 from src.log_creation.log_creator import get_log
-from src.split_detection.detect_arbitrary_order import detect_arbitrary_order
+from src.algorithm_components.split_detection.detect_arbitrary_order import detect_arbitrary_order
 from src.data_structures.log import Log
 
 def test_empty_log():

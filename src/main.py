@@ -1,12 +1,10 @@
 from data_structures.directly_follows_relation import DirectlyFollowsRelation
-from split_detection.detect_arbitrary_order import get_arbitrary_order_sublogs, create_arbitrary_order_partitions
-from split_detection.detect_sequence import get_sequence_sublogs
-from split_detection.minimum_self_distance_relation import trace_self_distance_list, get_minimum_self_distance_relations
+from src.algorithm_components.split_detection.detect_arbitrary_order import create_arbitrary_order_partitions
+from src.algorithm_components.split_detection.detect_sequence import get_sequence_sublogs
 from src.data_structures.activity import Activity
 from src.data_structures.trace import Trace
 from src.data_structures.log import Log
 from src.concurrency_miner import concurrency_miner
-from src.log_creation.log_creator import get_log
 
 #TODO Fallthroughs,
 # done  Empty Log -> Tau

@@ -1,10 +1,7 @@
 import copy
-from idlelib.configdialog import changes
 from itertools import combinations, product
-
 from src.data_structures.overlapping_relation import OverlappingRelation
-from src.data_structures.trace import Trace
-from src.split_detection.helper_functions import overlapping, create_sublogs_concurrent, connect_partitions
+from src.algorithm_components.helper_functions.helper_functions import create_sublogs_concurrent, connect_partitions
 
 
 def detect_parallel(log):

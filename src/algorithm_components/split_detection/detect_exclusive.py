@@ -1,7 +1,5 @@
 import copy
-
 from src.data_structures.log import Log
-from src.data_structures.trace import Trace
 
 
 def detect_exclusive(log):

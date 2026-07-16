@@ -1,9 +1,7 @@
 import copy
 from itertools import combinations
-
-from src.split_detection.minimum_self_distance_relation import get_minimum_self_distance_relations
-from src.split_detection.helper_functions import fully_direct_connected, overlapping, \
-    create_sublogs_concurrent, connect_partitions, not_fully_direct_connected_relation, \
+from src.algorithm_components.helper_functions.minimum_self_distance_relation import get_minimum_self_distance_relations
+from src.algorithm_components.helper_functions.helper_functions import create_sublogs_concurrent, connect_partitions, not_fully_direct_connected_relation, \
     add_partitions_with_no_start_or_end_to_arbitrary
 
 def detect_interleafing(log):
