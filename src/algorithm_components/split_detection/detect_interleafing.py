@@ -1,8 +1,11 @@
 import copy
 from itertools import combinations
 from src.algorithm_components.helper_functions.minimum_self_distance_relation import get_minimum_self_distance_relations
-from src.algorithm_components.helper_functions.helper_functions import create_sublogs_concurrent, connect_partitions, not_fully_direct_connected_relation, \
+from src.algorithm_components.helper_functions.helper_functions import not_fully_direct_connected_relation
+from src.algorithm_components.helper_functions.partition_functions import connect_partitions, \
     add_partitions_with_no_start_or_end_to_arbitrary
+from src.algorithm_components.helper_functions.sublog_functions import create_sublogs_concurrent
+
 
 def detect_interleafing(log):
     return len(create_interleafing_partitions(log)) > 1

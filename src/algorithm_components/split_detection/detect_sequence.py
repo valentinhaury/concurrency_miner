@@ -1,8 +1,11 @@
 import copy
 from itertools import combinations
 from src.data_structures.eventually_follows_relation import EventuallyFollowsRelation
-from src.algorithm_components.helper_functions.helper_functions import create_sublogs_sequential, connect_partitions, overlapping_partitions, \
+from src.algorithm_components.helper_functions.helper_functions import overlapping_partitions, \
     eventually_connected_in_only_one_direction_partitions
+from src.algorithm_components.helper_functions.partition_functions import connect_partitions
+from src.algorithm_components.helper_functions.sublog_functions import create_sublogs_sequential
+
 
 def detect_sequence(log):
     return len(create_sequence_partitions(log)) > 1

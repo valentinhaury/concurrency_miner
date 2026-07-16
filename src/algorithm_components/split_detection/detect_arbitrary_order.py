@@ -1,7 +1,8 @@
 import copy
 from itertools import combinations
-from src.algorithm_components.helper_functions.helper_functions import create_sublogs_sequential, \
-    connect_partitions, fully_eventually_connected_partitions
+from src.algorithm_components.helper_functions.helper_functions import fully_eventually_connected_partitions
+from src.algorithm_components.helper_functions.partition_functions import connect_partitions
+from src.algorithm_components.helper_functions.sublog_functions import create_sublogs_sequential
 
 
 def detect_arbitrary_order(log):

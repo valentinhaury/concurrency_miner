@@ -2,6 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e3ce310f-a6cb-4654-8df9-4da22971cc3a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/algorithm_components/fall_throughs/activitiy_once_per_trace.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/algorithm_components/helper_functions/partition_functions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/algorithm_components/helper_functions/sublog_functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/algorithm_components/helper_functions/helper_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/algorithm_components/helper_functions/helper_functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/algorithm_components/split_detection/detect_arbitrary_order.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/algorithm_components/split_detection/detect_arbitrary_order.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/algorithm_components/split_detection/detect_concurrent.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/algorithm_components/split_detection/detect_concurrent.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/algorithm_components/split_detection/detect_interleafing.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/algorithm_components/split_detection/detect_interleafing.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/algorithm_components/split_detection/detect_loop.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/algorithm_components/split_detection/detect_loop.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/algorithm_components/split_detection/detect_parallel.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/algorithm_components/split_detection/detect_parallel.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/algorithm_components/split_detection/detect_sequence.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/algorithm_components/split_detection/detect_sequence.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/concurrency_miner.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/concurrency_miner.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,6 +67,13 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Valentin\PycharmProjects\concurrency_miner\src\algorithm_components\base_cases" />
+      <recent name="C:\Users\Valentin\PycharmProjects\concurrency_miner\src\algorithm_components\helper_functions" />
+      <recent name="C:\Users\Valentin\PycharmProjects\concurrency_miner\src\algorithm_components" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -89,22 +107,12 @@
       <workItem from="1783487603355" duration="21072000" />
       <workItem from="1783580786262" duration="6005000" />
       <workItem from="1783664960281" duration="11444000" />
-      <workItem from="1784184715027" duration="1444000" />
+      <workItem from="1784184715027" duration="5132000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/split_detection/detect_parallel.py</url>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/concurrency_miner$.coverage" NAME=" Coverage Results" MODIFIED="1781601132527" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />

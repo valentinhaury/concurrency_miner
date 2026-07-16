@@ -3,8 +3,8 @@ from itertools import product, combinations
 from src.data_structures.log import Log
 from src.data_structures.trace import Trace
 from src.data_structures.directly_follows_relation import DirectlyFollowsRelation
-from src.algorithm_components.helper_functions.helper_functions import direct_connected_id, overlapping, \
-    connect_partitions
+from src.algorithm_components.helper_functions.helper_functions import direct_connected_id, overlapping
+from src.algorithm_components.helper_functions.partition_functions import connect_partitions
 
 
 def detect_loop(log):

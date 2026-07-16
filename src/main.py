@@ -1,3 +1,6 @@
+from algorithm_components.fall_throughs.activitiy_once_per_trace import get_activities_once_per_trace, \
+    detect_activity_once_per_trace
+from algorithm_components.helper_functions.sublog_functions import get_log_without_activity
 from data_structures.directly_follows_relation import DirectlyFollowsRelation
 from src.algorithm_components.split_detection.detect_arbitrary_order import create_arbitrary_order_partitions
 from src.algorithm_components.split_detection.detect_sequence import get_sequence_sublogs
@@ -34,25 +37,43 @@ t1 = Trace([a1, b1, c1], [DirectlyFollowsRelation(a1, c1), DirectlyFollowsRelati
 t2 = Trace([a2, b2], [DirectlyFollowsRelation(a2, b2)])
 test_log = Log([t1, t2])
 
+#get_log_without_activity
+#detect_activity_once_per_trace
+#get_activities_once_per_trace
+print("-----------------------------------------------------------------------------------------------------------")
+
+print(str(get_activities_once_per_trace(test_log)))
 
 print("-----------------------------------------------------------------------------------------------------------")
 
-i = 1
-for log in get_sequence_sublogs(test_log):
-    print("Log " + str(i))
-    i +=1
-    for trace in log.get_traces():
-        print(str(trace))
+if detect_activity_once_per_trace(test_log):
+    print("True")
+
+print("-----------------------------------------------------------------------------------------------------------")
+
+print("test log: " + str(test_log))
+
+activity = get_activities_once_per_trace(test_log)[0]
+print("test log without " + activity.get_label() + ": " + str(get_log_without_activity(test_log, activity)))
 
 print("-----------------------------------------------------------------------------------------------------------")
 if False:
+    i = 1
+    for log in get_sequence_sublogs(test_log):
+        print("Log " + str(i))
+        i +=1
+        for trace in log.get_traces():
+            print(str(trace))
+
+    print("-----------------------------------------------------------------------------------------------------------")
+
     print(str(create_arbitrary_order_partitions(test_log)))
     print("-----------------------------------------------------------------------------------------------------------")
-print("-----------------------------------------------------------------------------------------------------------")
-print("Discovered Tree")
-process_tree = concurrency_miner(test_log)
-print(str(process_tree))
-print("-----------------------------------------------------------------------------------------------------------")
-print("Input Log")
-print(str(test_log))
-print("-----------------------------------------------------------------------------------------------------------")
+    print("-----------------------------------------------------------------------------------------------------------")
+    print("Discovered Tree")
+    process_tree = concurrency_miner(test_log)
+    print(str(process_tree))
+    print("-----------------------------------------------------------------------------------------------------------")
+    print("Input Log")
+    print(str(test_log))
+    print("-----------------------------------------------------------------------------------------------------------")

@@ -1,3 +1,5 @@
+from src.algorithm_components.fall_throughs.activitiy_once_per_trace import detect_activity_once_per_trace, \
+    get_activities_once_per_trace
 from src.algorithm_components.base_cases.handle_empty_traces import handle_empty_traces
 from src.data_structures.activity import Activity
 from src.algorithm_components.base_cases.detect_single_activity import detect_single_activity, get_single_activity
@@ -82,10 +84,15 @@ def concurrency_miner(log, multi_instance_activities=None):
 # acitivity once per trace
     elif detect_activity_once_per_trace(log):
         process_tree = Node(Operator.Concurrent)
-        activity = get_activity_once_per_trace(log)
+        activity = get_activities_once_per_trace(log)[0]
         process_tree.add_child(activity)
         log = get_log_without_acitivitiy(log, activity)
         process_tree.add_child(concurrency_miner(log, multi_instance_activities))
         return process_tree
+#activity concurrent
+    #missing
+#tau-loop/strict-tau-loop
+    #missing
+# flower model → aktivitäten die in einem trace mehrfach vorkommen in einen tau-loop stecken
     else:
         return Node("Fall-Through")
